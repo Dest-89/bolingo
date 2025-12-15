@@ -2,6 +2,10 @@
 
 A complete, production-quality MVP website for the hunting niche, featuring a directory of hunting places, blog with categories, and store catalog with ThriveCart checkout integration.
 
+## 🔐 Admin Access
+
+**Admin Portal (private):** https://dest-89.github.io/bolingo/admin.html
+
 ## Features
 
 - **Directory Module**: Searchable/filterable hunting location database (Hampton, VA demo region)
