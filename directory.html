@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- SEO Meta Tags -->
+  <title>Hunting Directory | BOLINGO</title>
+  <meta name="description" content="Browse our comprehensive directory of hunting spots in Hampton, VA and the surrounding region. Filter by game type, access, and more.">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Hunting Directory | BOLINGO">
+  <meta property="og:description" content="Browse our comprehensive directory of hunting spots in Hampton, VA and the surrounding region.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1200&h=630&fit=crop">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://bolingo.com/directory.html">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23D4A857'%3E%3Cpath d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/%3E%3C/svg%3E">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+  <!-- Header Placeholder -->
+  <div id="header-placeholder"></div>
+
+  <main id="main-content">
+    <!-- Page Header -->
+    <section class="page-header">
+      <div class="container">
+        <h1 class="page-header__title">Hunting Directory</h1>
+        <nav class="page-header__breadcrumb" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">Directory</span>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Filters Section -->
+    <section class="section" style="padding-top: var(--space-8);">
+      <div class="container">
+        <div class="filters" role="search" aria-label="Filter hunting locations">
+          <h2 class="filters__title">Find Your Perfect Spot</h2>
+          <form id="filters-form" class="filters__grid">
+            <!-- Text Search -->
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="filter-search" class="form-label">Search</label>
+              <div class="search-bar">
+                <svg class="search-bar__icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                </svg>
+                <input
+                  type="text"
+                  id="filter-search"
+                  name="q"
+                  class="search-bar__input"
+                  placeholder="Search by name or keyword..."
+                  aria-label="Search hunting locations"
+                >
+              </div>
+            </div>
+
+            <!-- Type Filter -->
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="filter-type" class="form-label">Type</label>
+              <select id="filter-type" name="type" class="form-select">
+                <option value="">All Types</option>
+                <option value="Public Land">Public Land</option>
+                <option value="Private Land">Private Land</option>
+                <option value="Wildlife Management Area">Wildlife Management Area</option>
+                <option value="National Forest">National Forest</option>
+                <option value="State Park">State Park</option>
+              </select>
+            </div>
+
+            <!-- Access Filter -->
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="filter-access" class="form-label">Access</label>
+              <select id="filter-access" name="access" class="form-select">
+                <option value="">All Access Types</option>
+                <option value="Free">Free</option>
+                <option value="Permit Required">Permit Required</option>
+                <option value="Paid Access">Paid Access</option>
+                <option value="Membership">Membership</option>
+              </select>
+            </div>
+
+            <!-- State Filter -->
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="filter-state" class="form-label">State</label>
+              <select id="filter-state" name="state" class="form-select">
+                <option value="">All States</option>
+                <option value="VA">Virginia</option>
+                <option value="NC">North Carolina</option>
+                <option value="MD">Maryland</option>
+                <option value="WV">West Virginia</option>
+                <option value="PA">Pennsylvania</option>
+              </select>
+            </div>
+
+            <!-- Species Filter -->
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="filter-species" class="form-label">Species</label>
+              <select id="filter-species" name="species" class="form-select">
+                <option value="">All Species</option>
+                <option value="Whitetail Deer">Whitetail Deer</option>
+                <option value="Wild Turkey">Wild Turkey</option>
+                <option value="Waterfowl">Waterfowl</option>
+                <option value="Black Bear">Black Bear</option>
+                <option value="Wild Boar">Wild Boar</option>
+                <option value="Small Game">Small Game</option>
+                <option value="Upland Birds">Upland Birds</option>
+              </select>
+            </div>
+          </form>
+          <div class="filters__actions">
+            <button type="button" id="apply-filters" class="btn btn--primary">Apply Filters</button>
+            <button type="button" id="clear-filters" class="btn btn--ghost">Clear All</button>
+          </div>
+        </div>
+
+        <!-- Results Count -->
+        <div id="results-info" class="text-muted text-small" style="margin-bottom: var(--space-6);" aria-live="polite">
+          Loading listings...
+        </div>
+
+        <!-- Listings Grid -->
+        <div id="listings-grid" class="grid grid--3" aria-busy="true" aria-label="Hunting locations">
+          <!-- Loaded dynamically -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/templates.js"></script>
+  <script src="/assets/js/ui.js"></script>
+  <script src="/assets/js/headerFooter.js"></script>
+  <script src="/assets/js/pages/directory.js"></script>
+</body>
+</html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- SEO Meta Tags -->
+  <title>Admin Portal | BOLINGO</title>
+  <meta name="description" content="BOLINGO admin portal for managing directory listings, blog posts, and store products.">
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23D4A857'%3E%3Cpath d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/%3E%3C/svg%3E">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+  <!-- Header Placeholder -->
+  <div id="header-placeholder"></div>
+
+  <main id="main-content">
+    <!-- Page Header -->
+    <section class="page-header">
+      <div class="container">
+        <h1 class="page-header__title">Admin Portal</h1>
+        <nav class="page-header__breadcrumb" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">Admin</span>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Admin Content -->
+    <section class="admin">
+      <div class="container">
+        <!-- Token Configuration -->
+        <div class="admin__token">
+          <h2 style="margin-bottom: var(--space-4);">Admin Authentication</h2>
+          <div class="form-group" style="margin-bottom: var(--space-3);">
+            <label for="admin-token" class="form-label">Admin Token</label>
+            <input
+              type="password"
+              id="admin-token"
+              class="form-input"
+              placeholder="Enter your admin token"
+              autocomplete="off"
+            >
+            <p class="form-help">Your token is stored locally and never sent except with POST requests.</p>
+          </div>
+          <button id="save-token" class="btn btn--primary">Save Token</button>
+          <button id="clear-token" class="btn btn--ghost" style="margin-left: var(--space-2);">Clear Token</button>
+          <div id="token-status" class="admin__token-status" aria-live="polite"></div>
+        </div>
+
+        <!-- Admin Tabs -->
+        <nav class="admin__tabs" role="tablist" aria-label="Admin sections">
+          <button class="admin__tab active" data-tab="blog-category" role="tab" aria-selected="true" aria-controls="panel-blog-category">
+            Blog Category
+          </button>
+          <button class="admin__tab" data-tab="blog-post" role="tab" aria-selected="false" aria-controls="panel-blog-post">
+            Blog Post
+          </button>
+          <button class="admin__tab" data-tab="store-category" role="tab" aria-selected="false" aria-controls="panel-store-category">
+            Store Category
+          </button>
+          <button class="admin__tab" data-tab="store-product" role="tab" aria-selected="false" aria-controls="panel-store-product">
+            Product
+          </button>
+          <button class="admin__tab" data-tab="directory-listing" role="tab" aria-selected="false" aria-controls="panel-directory-listing">
+            Directory Listing
+          </button>
+        </nav>
+
+        <!-- Panel: Blog Category -->
+        <div id="panel-blog-category" class="admin__panel active" role="tabpanel" aria-labelledby="tab-blog-category">
+          <h3 class="admin__form-title">Create Blog Category</h3>
+          <form id="form-blog-category" novalidate>
+            <div class="form-group">
+              <label for="blog-cat-name" class="form-label form-label--required">Category Name</label>
+              <input type="text" id="blog-cat-name" name="name" class="form-input" placeholder="e.g., Hunting Tips" required>
+            </div>
+            <div class="form-group">
+              <label for="blog-cat-slug" class="form-label form-label--required">Slug</label>
+              <input type="text" id="blog-cat-slug" name="slug" class="form-input" placeholder="e.g., hunting-tips" required>
+              <p class="form-help">URL-friendly identifier (lowercase, hyphens only)</p>
+            </div>
+            <div class="form-group">
+              <label for="blog-cat-description" class="form-label">Description</label>
+              <textarea id="blog-cat-description" name="description" class="form-textarea" placeholder="Brief description of this category"></textarea>
+            </div>
+            <div id="msg-blog-category" style="display: none;" role="alert"></div>
+            <button type="submit" class="btn btn--primary">Create Category</button>
+          </form>
+        </div>
+
+        <!-- Panel: Blog Post -->
+        <div id="panel-blog-post" class="admin__panel" role="tabpanel" aria-labelledby="tab-blog-post">
+          <h3 class="admin__form-title">Create Blog Post</h3>
+          <form id="form-blog-post" novalidate>
+            <div class="form-group">
+              <label for="blog-post-title" class="form-label form-label--required">Title</label>
+              <input type="text" id="blog-post-title" name="title" class="form-input" placeholder="Post title" required>
+            </div>
+            <div class="form-group">
+              <label for="blog-post-slug" class="form-label form-label--required">Slug</label>
+              <input type="text" id="blog-post-slug" name="slug" class="form-input" placeholder="post-url-slug" required>
+            </div>
+            <div class="form-group">
+              <label for="blog-post-category" class="form-label form-label--required">Category</label>
+              <select id="blog-post-category" name="category_slug" class="form-select" required>
+                <option value="">Loading categories...</option>
+              </select>
+              <button type="button" id="add-blog-category-inline" class="btn btn--ghost btn--sm" style="margin-top: var(--space-2);">
+                + Add New Category
+              </button>
+            </div>
+            <div id="inline-blog-category" style="display: none; background: var(--color-bg-darker); padding: var(--space-4); border-radius: var(--radius-md); margin-bottom: var(--space-4);">
+              <h4 style="margin-bottom: var(--space-3);">Quick Add Category</h4>
+              <div class="form-group">
+                <input type="text" id="inline-blog-cat-name" class="form-input" placeholder="New category name">
+              </div>
+              <button type="button" id="save-inline-blog-category" class="btn btn--primary btn--sm">Add Category</button>
+              <button type="button" id="cancel-inline-blog-category" class="btn btn--ghost btn--sm">Cancel</button>
+            </div>
+            <div class="form-group">
+              <label for="blog-post-author" class="form-label">Author</label>
+              <input type="text" id="blog-post-author" name="author" class="form-input" placeholder="Author name">
+            </div>
+            <div class="form-group">
+              <label for="blog-post-excerpt" class="form-label">Excerpt</label>
+              <textarea id="blog-post-excerpt" name="excerpt" class="form-textarea" rows="2" placeholder="Brief summary for previews"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="blog-post-content" class="form-label form-label--required">Content</label>
+              <textarea id="blog-post-content" name="content" class="form-textarea" rows="10" placeholder="Full post content..." required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="blog-post-image" class="form-label">Featured Image URL</label>
+              <input type="url" id="blog-post-image" name="image_url" class="form-input" placeholder="https://...">
+            </div>
+            <div class="form-group">
+              <label for="blog-post-tags" class="form-label">Tags</label>
+              <input type="text" id="blog-post-tags" name="tags" class="form-input" placeholder="tag1, tag2, tag3">
+              <p class="form-help">Comma-separated tags</p>
+            </div>
+            <div id="msg-blog-post" style="display: none;" role="alert"></div>
+            <button type="submit" class="btn btn--primary">Create Post</button>
+          </form>
+        </div>
+
+        <!-- Panel: Store Category -->
+        <div id="panel-store-category" class="admin__panel" role="tabpanel" aria-labelledby="tab-store-category">
+          <h3 class="admin__form-title">Create Store Category</h3>
+          <form id="form-store-category" novalidate>
+            <div class="form-group">
+              <label for="store-cat-name" class="form-label form-label--required">Category Name</label>
+              <input type="text" id="store-cat-name" name="name" class="form-input" placeholder="e.g., Optics" required>
+            </div>
+            <div class="form-group">
+              <label for="store-cat-slug" class="form-label form-label--required">Slug</label>
+              <input type="text" id="store-cat-slug" name="slug" class="form-input" placeholder="e.g., optics" required>
+            </div>
+            <div class="form-group">
+              <label for="store-cat-description" class="form-label">Description</label>
+              <textarea id="store-cat-description" name="description" class="form-textarea" placeholder="Brief description of this category"></textarea>
+            </div>
+            <div id="msg-store-category" style="display: none;" role="alert"></div>
+            <button type="submit" class="btn btn--primary">Create Category</button>
+          </form>
+        </div>
+
+        <!-- Panel: Store Product -->
+        <div id="panel-store-product" class="admin__panel" role="tabpanel" aria-labelledby="tab-store-product">
+          <h3 class="admin__form-title">Create Product</h3>
+          <form id="form-store-product" novalidate>
+            <div class="form-group">
+              <label for="product-name" class="form-label form-label--required">Product Name</label>
+              <input type="text" id="product-name" name="name" class="form-input" placeholder="Product name" required>
+            </div>
+            <div class="form-group">
+              <label for="product-slug" class="form-label form-label--required">Slug</label>
+              <input type="text" id="product-slug" name="slug" class="form-input" placeholder="product-url-slug" required>
+            </div>
+            <div class="form-group">
+              <label for="product-category" class="form-label form-label--required">Category</label>
+              <select id="product-category" name="category_slug" class="form-select" required>
+                <option value="">Loading categories...</option>
+              </select>
+              <button type="button" id="add-store-category-inline" class="btn btn--ghost btn--sm" style="margin-top: var(--space-2);">
+                + Add New Category
+              </button>
+            </div>
+            <div id="inline-store-category" style="display: none; background: var(--color-bg-darker); padding: var(--space-4); border-radius: var(--radius-md); margin-bottom: var(--space-4);">
+              <h4 style="margin-bottom: var(--space-3);">Quick Add Category</h4>
+              <div class="form-group">
+                <input type="text" id="inline-store-cat-name" class="form-input" placeholder="New category name">
+              </div>
+              <button type="button" id="save-inline-store-category" class="btn btn--primary btn--sm">Add Category</button>
+              <button type="button" id="cancel-inline-store-category" class="btn btn--ghost btn--sm">Cancel</button>
+            </div>
+            <div class="form-group">
+              <label for="product-price" class="form-label form-label--required">Price ($)</label>
+              <input type="number" id="product-price" name="price" class="form-input" placeholder="0.00" step="0.01" min="0" required>
+            </div>
+            <div class="form-group">
+              <label for="product-description" class="form-label">Description</label>
+              <textarea id="product-description" name="description" class="form-textarea" rows="4" placeholder="Product description"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="product-image" class="form-label">Image URL</label>
+              <input type="url" id="product-image" name="image_url" class="form-input" placeholder="https://...">
+            </div>
+            <div class="form-group">
+              <label for="product-thrivecart" class="form-label">ThriveCart Checkout URL</label>
+              <input type="url" id="product-thrivecart" name="thrivecart_checkout_url" class="form-input" placeholder="https://yourstore.thrivecart.com/...">
+              <p class="form-help">Leave blank to show "Coming Soon" on product page</p>
+            </div>
+            <div class="form-group">
+              <label for="product-sku" class="form-label">SKU</label>
+              <input type="text" id="product-sku" name="sku" class="form-input" placeholder="PROD-001">
+            </div>
+            <div class="form-group">
+              <label for="product-brand" class="form-label">Brand</label>
+              <input type="text" id="product-brand" name="brand" class="form-input" placeholder="Brand name">
+            </div>
+            <div id="msg-store-product" style="display: none;" role="alert"></div>
+            <button type="submit" class="btn btn--primary">Create Product</button>
+          </form>
+        </div>
+
+        <!-- Panel: Directory Listing -->
+        <div id="panel-directory-listing" class="admin__panel" role="tabpanel" aria-labelledby="tab-directory-listing">
+          <h3 class="admin__form-title">Create Directory Listing</h3>
+          <form id="form-directory-listing" novalidate>
+            <div class="form-group">
+              <label for="listing-name" class="form-label form-label--required">Location Name</label>
+              <input type="text" id="listing-name" name="name" class="form-input" placeholder="e.g., Big Woods Wildlife Area" required>
+            </div>
+            <div class="form-group">
+              <label for="listing-slug" class="form-label form-label--required">Slug</label>
+              <input type="text" id="listing-slug" name="slug" class="form-input" placeholder="big-woods-wildlife-area" required>
+            </div>
+            <div class="form-group">
+              <label for="listing-type" class="form-label form-label--required">Type</label>
+              <select id="listing-type" name="type" class="form-select" required>
+                <option value="">Select type...</option>
+                <option value="Public Land">Public Land</option>
+                <option value="Private Land">Private Land</option>
+                <option value="Wildlife Management Area">Wildlife Management Area</option>
+                <option value="National Forest">National Forest</option>
+                <option value="State Park">State Park</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="listing-access" class="form-label form-label--required">Access</label>
+              <select id="listing-access" name="access" class="form-select" required>
+                <option value="">Select access type...</option>
+                <option value="Free">Free</option>
+                <option value="Permit Required">Permit Required</option>
+                <option value="Paid Access">Paid Access</option>
+                <option value="Membership">Membership</option>
+              </select>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4);">
+              <div class="form-group">
+                <label for="listing-city" class="form-label">City</label>
+                <input type="text" id="listing-city" name="city" class="form-input" placeholder="Hampton">
+              </div>
+              <div class="form-group">
+                <label for="listing-state" class="form-label form-label--required">State</label>
+                <select id="listing-state" name="state" class="form-select" required>
+                  <option value="">Select state...</option>
+                  <option value="VA">Virginia</option>
+                  <option value="NC">North Carolina</option>
+                  <option value="MD">Maryland</option>
+                  <option value="WV">West Virginia</option>
+                  <option value="PA">Pennsylvania</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="listing-address" class="form-label">Address</label>
+              <input type="text" id="listing-address" name="address" class="form-input" placeholder="Full street address">
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4);">
+              <div class="form-group">
+                <label for="listing-lat" class="form-label">Latitude</label>
+                <input type="text" id="listing-lat" name="latitude" class="form-input" placeholder="37.0299">
+              </div>
+              <div class="form-group">
+                <label for="listing-lng" class="form-label">Longitude</label>
+                <input type="text" id="listing-lng" name="longitude" class="form-input" placeholder="-76.3452">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="listing-species" class="form-label">Species Available</label>
+              <input type="text" id="listing-species" name="species" class="form-input" placeholder="Whitetail Deer, Wild Turkey, Waterfowl">
+              <p class="form-help">Comma-separated list of species</p>
+            </div>
+            <div class="form-group">
+              <label for="listing-description" class="form-label">Description</label>
+              <textarea id="listing-description" name="description" class="form-textarea" rows="4" placeholder="Detailed description of the hunting location"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="listing-regulations" class="form-label">Regulations & Notes</label>
+              <textarea id="listing-regulations" name="regulations" class="form-textarea" rows="3" placeholder="Special regulations, season info, etc."></textarea>
+            </div>
+            <div class="form-group">
+              <label for="listing-amenities" class="form-label">Amenities</label>
+              <input type="text" id="listing-amenities" name="amenities" class="form-input" placeholder="Parking, Boat Launch, Blinds">
+              <p class="form-help">Comma-separated list</p>
+            </div>
+            <div class="form-group">
+              <label for="listing-image" class="form-label">Image URL</label>
+              <input type="url" id="listing-image" name="image_url" class="form-input" placeholder="https://...">
+            </div>
+            <div class="form-group">
+              <label for="listing-website" class="form-label">Website</label>
+              <input type="url" id="listing-website" name="website" class="form-input" placeholder="https://...">
+            </div>
+            <div class="form-group">
+              <label for="listing-contact" class="form-label">Contact Info</label>
+              <input type="text" id="listing-contact" name="contact_info" class="form-input" placeholder="Phone number or email">
+            </div>
+            <div id="msg-directory-listing" style="display: none;" role="alert"></div>
+            <button type="submit" class="btn btn--primary">Create Listing</button>
+          </form>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/templates.js"></script>
+  <script src="/assets/js/ui.js"></script>
+  <script src="/assets/js/headerFooter.js"></script>
+  <script src="/assets/js/pages/admin.js"></script>
+</body>
+</html>

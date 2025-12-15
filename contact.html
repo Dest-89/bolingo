@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- SEO Meta Tags -->
+  <title>Contact Us | BOLINGO</title>
+  <meta name="description" content="Get in touch with the BOLINGO team. We're here to help with questions about hunting locations, gear, or anything else.">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Contact Us | BOLINGO">
+  <meta property="og:description" content="Get in touch with the BOLINGO team.">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://bolingo.com/contact.html">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23D4A857'%3E%3Cpath d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/%3E%3C/svg%3E">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+  <!-- Header Placeholder -->
+  <div id="header-placeholder"></div>
+
+  <main id="main-content">
+    <!-- Page Header -->
+    <section class="page-header">
+      <div class="container">
+        <h1 class="page-header__title">Contact Us</h1>
+        <nav class="page-header__breadcrumb" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">Contact</span>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Contact Content -->
+    <section class="content-page">
+      <div class="container content-page__container">
+        <div class="content-page__body">
+          <p style="text-align: center; font-size: var(--text-lg); margin-bottom: var(--space-8);">
+            Have questions about hunting spots, gear recommendations, or anything else? We'd love to hear from you. Fill out the form below or reach out directly.
+          </p>
+
+          <!-- Contact Form -->
+          <div class="contact-form">
+            <h2 class="contact-form__title">Send Us a Message</h2>
+            <form id="contact-form" novalidate>
+              <div class="form-group">
+                <label for="contact-name" class="form-label form-label--required">Your Name</label>
+                <input
+                  type="text"
+                  id="contact-name"
+                  name="name"
+                  class="form-input"
+                  placeholder="John Doe"
+                  required
+                  aria-required="true"
+                >
+              </div>
+
+              <div class="form-group">
+                <label for="contact-email" class="form-label form-label--required">Email Address</label>
+                <input
+                  type="email"
+                  id="contact-email"
+                  name="email"
+                  class="form-input"
+                  placeholder="john@example.com"
+                  required
+                  aria-required="true"
+                >
+              </div>
+
+              <div class="form-group">
+                <label for="contact-subject" class="form-label form-label--required">Subject</label>
+                <select id="contact-subject" name="subject" class="form-select" required aria-required="true">
+                  <option value="">Select a topic...</option>
+                  <option value="general">General Inquiry</option>
+                  <option value="directory">Hunting Directory Question</option>
+                  <option value="store">Store & Products</option>
+                  <option value="listing">Submit a Hunting Location</option>
+                  <option value="partnership">Partnership Opportunity</option>
+                  <option value="feedback">Feedback & Suggestions</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="contact-message" class="form-label form-label--required">Message</label>
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  class="form-textarea"
+                  placeholder="How can we help you?"
+                  rows="6"
+                  required
+                  aria-required="true"
+                ></textarea>
+              </div>
+
+              <div id="form-message" style="display: none; margin-bottom: var(--space-4);" role="alert"></div>
+
+              <button type="submit" class="btn btn--primary btn--lg">Send Message</button>
+            </form>
+          </div>
+
+          <!-- Contact Info -->
+          <div class="contact-info">
+            <h2 class="contact-info__title">Other Ways to Reach Us</h2>
+
+            <div class="contact-info__item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--color-primary)">
+                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+              <span>Email: <a href="mailto:hello@bolingo.com">hello@bolingo.com</a></span>
+            </div>
+
+            <div class="contact-info__item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--color-primary)">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+              </svg>
+              <span>Based in Hampton, Virginia, USA</span>
+            </div>
+
+            <div class="contact-info__item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--color-primary)">
+                <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+              </svg>
+              <span>Response time: Within 24-48 hours</span>
+            </div>
+
+            <p style="margin-top: var(--space-6); color: var(--color-text-secondary);">
+              For urgent matters, please email us directly. We check our inbox regularly and will get back to you as soon as possible.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/templates.js"></script>
+  <script src="/assets/js/ui.js"></script>
+  <script src="/assets/js/headerFooter.js"></script>
+  <script>
+    // Contact form handling
+    (function() {
+      const form = document.getElementById('contact-form');
+      const messageEl = document.getElementById('form-message');
+
+      if (!form) return;
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Validate form
+        const validation = UI.validateForm(form);
+
+        if (!validation.isValid) {
+          messageEl.innerHTML = '<div class="error-state" style="padding: var(--space-4);"><p>' + validation.errors.join('<br>') + '</p></div>';
+          messageEl.style.display = 'block';
+          return;
+        }
+
+        // Get form data
+        const formData = UI.formDataToObject(form);
+
+        // Simulate form submission (frontend only - no backend)
+        messageEl.innerHTML = Templates.successMessage('Thank you for your message! We\'ll get back to you within 24-48 hours.');
+        messageEl.style.display = 'block';
+        form.reset();
+
+        // Show toast
+        UI.showToast('Message sent successfully!', 'success');
+
+        // Scroll to message
+        messageEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    })();
+  </script>
+</body>
+</html>
