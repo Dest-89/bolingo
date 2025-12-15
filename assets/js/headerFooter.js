@@ -123,8 +123,8 @@ const HeaderFooter = (() => {
   async function init() {
     // Load components
     await Promise.all([
-      loadComponent('/components/header.html', '#header-placeholder'),
-      loadComponent('/components/footer.html', '#footer-placeholder')
+      loadComponent('components/header.html', '#header-placeholder'),
+      loadComponent('components/footer.html', '#footer-placeholder')
     ]);
 
     // Initialize functionality
