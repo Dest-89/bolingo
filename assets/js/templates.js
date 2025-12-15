@@ -133,7 +133,7 @@ const Templates = (() => {
 
     return `
       <article class="card card--listing">
-        <a href="/listing.html?slug=${encodeURIComponent(slug)}" class="card__image-wrap" aria-label="View ${escapeHtml(name)}">
+        <a href="listing.html?slug=${encodeURIComponent(slug)}" class="card__image-wrap" aria-label="View ${escapeHtml(name)}">
           <div class="card__image">
             <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(name)}" loading="lazy">
             <div class="card__image-overlay"></div>
@@ -155,7 +155,7 @@ const Templates = (() => {
             ${access ? `<span class="card__access card__access--${access.toLowerCase().replace(/\s+/g, '-')}">${escapeHtml(access)}</span>` : ''}
           </div>
           <h3 class="card__title">
-            <a href="/listing.html?slug=${encodeURIComponent(slug)}">${escapeHtml(name)}</a>
+            <a href="listing.html?slug=${encodeURIComponent(slug)}">${escapeHtml(name)}</a>
           </h3>
           ${location ? `
             <div class="card__region">
@@ -224,7 +224,7 @@ const Templates = (() => {
 
     return `
       <article class="card card--post">
-        <a href="/post.html?slug=${encodeURIComponent(slug)}" class="card__image-wrap" aria-label="Read ${escapeHtml(title)}">
+        <a href="post.html?slug=${encodeURIComponent(slug)}" class="card__image-wrap" aria-label="Read ${escapeHtml(title)}">
           <div class="card__image">
             <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(title)}" loading="lazy">
             <div class="card__image-overlay"></div>
@@ -242,10 +242,10 @@ const Templates = (() => {
         </a>
         <div class="card__content">
           ${category_name ? `
-            <a href="/blog-category.html?slug=${encodeURIComponent(category_slug)}" class="card__category-pill">${escapeHtml(category_name)}</a>
+            <a href="blog-category.html?slug=${encodeURIComponent(category_slug)}" class="card__category-pill">${escapeHtml(category_name)}</a>
           ` : ''}
           <h3 class="card__title">
-            <a href="/post.html?slug=${encodeURIComponent(slug)}">${escapeHtml(title)}</a>
+            <a href="post.html?slug=${encodeURIComponent(slug)}">${escapeHtml(title)}</a>
           </h3>
           ${displayExcerpt ? `<p class="card__excerpt">${escapeHtml(displayExcerpt)}</p>` : ''}
           <div class="card__author-row">
@@ -258,7 +258,7 @@ const Templates = (() => {
               ${author ? `<span class="card__author-name">${escapeHtml(author)}</span>` : ''}
               <span class="card__author-date">${month} ${day}, ${year}</span>
             </div>
-            <a href="/post.html?slug=${encodeURIComponent(slug)}" class="card__read-link">
+            <a href="post.html?slug=${encodeURIComponent(slug)}" class="card__read-link">
               Read
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -298,7 +298,7 @@ const Templates = (() => {
 
     return `
       <article class="card card--product">
-        <a href="/product.html?slug=${encodeURIComponent(slug)}" class="card__image-wrap" aria-label="View ${escapeHtml(name)}">
+        <a href="product.html?slug=${encodeURIComponent(slug)}" class="card__image-wrap" aria-label="View ${escapeHtml(name)}">
           <div class="card__image">
             <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(name)}" loading="lazy">
             <div class="card__image-overlay"></div>
@@ -319,7 +319,7 @@ const Templates = (() => {
         </a>
         <div class="card__content">
           <h3 class="card__title">
-            <a href="/product.html?slug=${encodeURIComponent(slug)}">${escapeHtml(name)}</a>
+            <a href="product.html?slug=${encodeURIComponent(slug)}">${escapeHtml(name)}</a>
           </h3>
           ${description ? `<p class="card__excerpt">${escapeHtml(truncate(description, 90))}</p>` : ''}
           <div class="card__product-footer">
@@ -335,7 +335,7 @@ const Templates = (() => {
                     <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
                   </svg>
                 </a>`
-              : `<a href="/product.html?slug=${encodeURIComponent(slug)}" class="card__details-btn">
+              : `<a href="product.html?slug=${encodeURIComponent(slug)}" class="card__details-btn">
                   <span>View Details</span>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M5 12h14M12 5l7 7-7 7"/>
