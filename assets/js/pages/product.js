@@ -20,6 +20,8 @@
    * Render product detail
    */
   function renderProduct(product) {
+    // Normalize the data from API
+    const normalized = Templates.normalizeProduct(product);
     const {
       name = 'Unnamed Product',
       description = '',
@@ -32,7 +34,7 @@
       brand = '',
       features = [],
       specifications = {}
-    } = product;
+    } = normalized;
 
     const imageUrl = image_url || Templates.getPlaceholderImage('product');
     const featuresArray = Array.isArray(features) ? features : (features ? features.split(',').map(f => f.trim()) : []);
@@ -168,25 +170,28 @@
       const response = await API.getStoreProduct(slug);
       const product = response.data || response.product || response;
 
-      if (!product || !product.name) {
+      if (!product || (!product.name && !product.title)) {
         throw new Error('Product not found');
       }
+
+      // Normalize product data
+      const normalizedProduct = Templates.normalizeProduct(product);
 
       // Update page content
       contentEl.innerHTML = renderProduct(product);
       contentEl.setAttribute('aria-busy', 'false');
 
       // Update page title and breadcrumb
-      titleEl.textContent = product.name;
-      breadcrumbEl.textContent = Templates.truncate(product.name, 30);
+      titleEl.textContent = normalizedProduct.name;
+      breadcrumbEl.textContent = Templates.truncate(normalizedProduct.name, 30);
 
       // Update SEO
       UI.setPageMeta({
-        title: product.name,
-        description: product.description || `Buy ${product.name} - ${Templates.formatPrice(product.price)}`,
-        ogTitle: product.name,
-        ogDescription: product.description,
-        ogImage: product.image_url,
+        title: normalizedProduct.name,
+        description: normalizedProduct.description || `Buy ${normalizedProduct.name} - ${Templates.formatPrice(normalizedProduct.price)}`,
+        ogTitle: normalizedProduct.name,
+        ogDescription: normalizedProduct.description,
+        ogImage: normalizedProduct.image_url,
         canonical: `https://bolingo.com/product.html?slug=${encodeURIComponent(slug)}`
       });
 

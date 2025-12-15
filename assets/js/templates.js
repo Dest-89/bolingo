@@ -5,6 +5,48 @@
 
 const Templates = (() => {
   /**
+   * Normalize listing data from API to expected format
+   */
+  function normalizeListing(data) {
+    if (!data) return data;
+    return {
+      ...data,
+      name: data.name || data.title || '',
+      description: data.description || data.description_md || '',
+      city: data.city || data.region || '',
+      species: data.species || (data.species_tags ? data.species_tags.split(',').map(s => s.trim()) : []),
+      image_url: data.image_url || data.featured_image_url || '',
+      website: data.website || data.website_url || '',
+      contact_info: data.contact_info || data.contact_email || ''
+    };
+  }
+
+  /**
+   * Normalize product data from API to expected format
+   */
+  function normalizeProduct(data) {
+    if (!data) return data;
+    return {
+      ...data,
+      name: data.name || data.title || '',
+      description: data.description || data.short_description || data.description_md || '',
+      image_url: data.image_url || data.featured_image_url || ''
+    };
+  }
+
+  /**
+   * Normalize blog post data from API to expected format
+   */
+  function normalizePost(data) {
+    if (!data) return data;
+    return {
+      ...data,
+      content: data.content || data.content_md || '',
+      image_url: data.image_url || data.featured_image_url || ''
+    };
+  }
+
+  /**
    * Escape HTML to prevent XSS
    */
   function escapeHtml(text) {
@@ -64,9 +106,11 @@ const Templates = (() => {
   }
 
   /**
-   * Directory Listing Card
+   * Directory Listing Card - Field Guide Style
    */
   function listingCard(listing) {
+    // Normalize the data first
+    const normalized = normalizeListing(listing);
     const {
       slug = '',
       name = 'Unnamed Listing',
@@ -77,42 +121,81 @@ const Templates = (() => {
       city = '',
       species = [],
       image_url = ''
-    } = listing || {};
+    } = normalized || {};
 
     const imageUrl = image_url || getPlaceholderImage('listing');
     const speciesArray = Array.isArray(species) ? species : (species ? [species] : []);
     const location = [city, state].filter(Boolean).join(', ');
 
+    // Generate pseudo-coordinates for visual effect
+    const coordLat = (37 + Math.random() * 2).toFixed(4);
+    const coordLng = (76 + Math.random() * 2).toFixed(4);
+
     return `
       <article class="card card--listing">
-        <a href="listing.html?slug=${encodeURIComponent(slug)}" class="card__image" aria-label="View ${escapeHtml(name)}">
-          <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(name)}" loading="lazy">
-          ${type ? `<span class="card__badge">${escapeHtml(type)}</span>` : ''}
-        </a>
-        <div class="card__content">
-          <h3 class="card__title">
-            <a href="listing.html?slug=${encodeURIComponent(slug)}">${escapeHtml(name)}</a>
-          </h3>
-          ${description ? `<p class="card__excerpt">${escapeHtml(truncate(description))}</p>` : ''}
-          <div class="card__meta">
-            ${location ? `<span class="card__meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>${escapeHtml(location)}</span>` : ''}
-            ${access ? `<span class="card__meta-item">${escapeHtml(access)}</span>` : ''}
+        <a href="/listing.html?slug=${encodeURIComponent(slug)}" class="card__image-wrap" aria-label="View ${escapeHtml(name)}">
+          <div class="card__image">
+            <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(name)}" loading="lazy">
+            <div class="card__image-overlay"></div>
           </div>
-          ${speciesArray.length > 0 ? `
-            <div class="card__tags">
-              ${speciesArray.slice(0, 3).map(s => `<span class="card__tag">${escapeHtml(s)}</span>`).join('')}
-              ${speciesArray.length > 3 ? `<span class="card__tag">+${speciesArray.length - 3} more</span>` : ''}
+          ${type ? `
+            <div class="card__stamp">
+              <span class="card__stamp-text">${escapeHtml(type)}</span>
             </div>
           ` : ''}
+          <div class="card__compass">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71L12 2z"/>
+            </svg>
+          </div>
+        </a>
+        <div class="card__content">
+          <div class="card__location-bar">
+            <span class="card__coords">${coordLat}°N ${coordLng}°W</span>
+            ${access ? `<span class="card__access card__access--${access.toLowerCase().replace(/\s+/g, '-')}">${escapeHtml(access)}</span>` : ''}
+          </div>
+          <h3 class="card__title">
+            <a href="/listing.html?slug=${encodeURIComponent(slug)}">${escapeHtml(name)}</a>
+          </h3>
+          ${location ? `
+            <div class="card__region">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+              </svg>
+              <span>${escapeHtml(location)}</span>
+            </div>
+          ` : ''}
+          ${description ? `<p class="card__excerpt">${escapeHtml(truncate(description, 100))}</p>` : ''}
+          ${speciesArray.length > 0 ? `
+            <div class="card__species">
+              <span class="card__species-label">Game:</span>
+              <div class="card__species-list">
+                ${speciesArray.slice(0, 3).map(s => `<span class="card__species-tag">${escapeHtml(s)}</span>`).join('')}
+                ${speciesArray.length > 3 ? `<span class="card__species-more">+${speciesArray.length - 3}</span>` : ''}
+              </div>
+            </div>
+          ` : ''}
+          <div class="card__cta">
+            <span class="card__cta-text">View Location</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </div>
         </div>
+        <div class="card__corner card__corner--tl"></div>
+        <div class="card__corner card__corner--tr"></div>
+        <div class="card__corner card__corner--bl"></div>
+        <div class="card__corner card__corner--br"></div>
       </article>
     `;
   }
 
   /**
-   * Blog Post Card
+   * Blog Post Card - Editorial Magazine Style
    */
   function postCard(post) {
+    // Normalize the data first
+    const normalized = normalizePost(post);
     const {
       slug = '',
       title = 'Untitled Post',
@@ -123,37 +206,77 @@ const Templates = (() => {
       author = '',
       published_at = '',
       image_url = ''
-    } = post || {};
+    } = normalized || {};
 
     const imageUrl = image_url || getPlaceholderImage('blog');
-    const displayExcerpt = excerpt || truncate(content, 120);
+    const displayExcerpt = excerpt || truncate(content, 100);
+
+    // Parse date for display
+    const dateObj = published_at ? new Date(published_at) : new Date();
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const day = dateObj.getDate();
+    const month = monthNames[dateObj.getMonth()];
+    const year = dateObj.getFullYear();
+
+    // Estimate read time (rough: 200 words per minute)
+    const wordCount = (content || excerpt || '').split(/\s+/).length;
+    const readTime = Math.max(1, Math.ceil(wordCount / 200));
 
     return `
       <article class="card card--post">
-        <a href="post.html?slug=${encodeURIComponent(slug)}" class="card__image" aria-label="Read ${escapeHtml(title)}">
-          <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(title)}" loading="lazy">
+        <a href="/post.html?slug=${encodeURIComponent(slug)}" class="card__image-wrap" aria-label="Read ${escapeHtml(title)}">
+          <div class="card__image">
+            <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(title)}" loading="lazy">
+            <div class="card__image-overlay"></div>
+          </div>
+          <div class="card__date-badge">
+            <span class="card__date-day">${day}</span>
+            <span class="card__date-month">${month}</span>
+          </div>
+          <div class="card__read-time">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+            </svg>
+            <span>${readTime} min read</span>
+          </div>
         </a>
         <div class="card__content">
           ${category_name ? `
-            <a href="blog-category.html?slug=${encodeURIComponent(category_slug)}" class="card__category">${escapeHtml(category_name)}</a>
+            <a href="/blog-category.html?slug=${encodeURIComponent(category_slug)}" class="card__category-pill">${escapeHtml(category_name)}</a>
           ` : ''}
           <h3 class="card__title">
-            <a href="post.html?slug=${encodeURIComponent(slug)}">${escapeHtml(title)}</a>
+            <a href="/post.html?slug=${encodeURIComponent(slug)}">${escapeHtml(title)}</a>
           </h3>
           ${displayExcerpt ? `<p class="card__excerpt">${escapeHtml(displayExcerpt)}</p>` : ''}
-          <div class="card__meta">
-            ${author ? `<span class="card__meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>${escapeHtml(author)}</span>` : ''}
-            ${published_at ? `<span class="card__meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg>${formatDate(published_at)}</span>` : ''}
+          <div class="card__author-row">
+            <div class="card__author-avatar">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+              </svg>
+            </div>
+            <div class="card__author-info">
+              ${author ? `<span class="card__author-name">${escapeHtml(author)}</span>` : ''}
+              <span class="card__author-date">${month} ${day}, ${year}</span>
+            </div>
+            <a href="/post.html?slug=${encodeURIComponent(slug)}" class="card__read-link">
+              Read
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
           </div>
         </div>
+        <div class="card__shine"></div>
       </article>
     `;
   }
 
   /**
-   * Product Card
+   * Product Card - Outfitter's Catalog Style
    */
   function productCard(product) {
+    // Normalize the data first
+    const normalized = normalizeProduct(product);
     const {
       slug = '',
       name = 'Unnamed Product',
@@ -163,34 +286,68 @@ const Templates = (() => {
       category_slug = '',
       image_url = '',
       thrivecart_checkout_url = ''
-    } = product || {};
+    } = normalized || {};
 
     const imageUrl = image_url || getPlaceholderImage('product');
     const isCheckoutAvailable = thrivecart_checkout_url &&
       thrivecart_checkout_url !== '' &&
       thrivecart_checkout_url !== 'https://example.com/thrivecart-checkout-link';
 
+    // Generate item number for catalog effect
+    const itemNum = Math.floor(Math.random() * 9000) + 1000;
+
     return `
       <article class="card card--product">
-        <a href="product.html?slug=${encodeURIComponent(slug)}" class="card__image" aria-label="View ${escapeHtml(name)}">
-          <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(name)}" loading="lazy">
+        <a href="/product.html?slug=${encodeURIComponent(slug)}" class="card__image-wrap" aria-label="View ${escapeHtml(name)}">
+          <div class="card__image">
+            <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(name)}" loading="lazy">
+            <div class="card__image-overlay"></div>
+          </div>
+          ${category_name ? `
+            <div class="card__ribbon">
+              <span class="card__ribbon-text">${escapeHtml(category_name)}</span>
+            </div>
+          ` : ''}
+          <div class="card__price-tag">
+            <span class="card__price-currency">$</span>
+            <span class="card__price-amount">${parseFloat(price).toFixed(0)}</span>
+            <span class="card__price-cents">${(parseFloat(price) % 1).toFixed(2).substring(2)}</span>
+          </div>
+          <div class="card__item-number">
+            <span>Item #${itemNum}</span>
+          </div>
         </a>
         <div class="card__content">
-          ${category_name ? `
-            <a href="store-category.html?slug=${encodeURIComponent(category_slug)}" class="card__category">${escapeHtml(category_name)}</a>
-          ` : ''}
           <h3 class="card__title">
-            <a href="product.html?slug=${encodeURIComponent(slug)}">${escapeHtml(name)}</a>
+            <a href="/product.html?slug=${encodeURIComponent(slug)}">${escapeHtml(name)}</a>
           </h3>
-          ${description ? `<p class="card__excerpt">${escapeHtml(truncate(description, 80))}</p>` : ''}
-          <div class="card__price">${formatPrice(price)}</div>
-          <div class="card__actions">
-            <a href="product.html?slug=${encodeURIComponent(slug)}" class="btn btn--outline btn--sm">View Details</a>
+          ${description ? `<p class="card__excerpt">${escapeHtml(truncate(description, 90))}</p>` : ''}
+          <div class="card__product-footer">
+            <div class="card__availability">
+              <span class="card__stock-dot ${isCheckoutAvailable ? 'card__stock-dot--available' : 'card__stock-dot--soon'}"></span>
+              <span class="card__stock-text">${isCheckoutAvailable ? 'In Stock' : 'Coming Soon'}</span>
+            </div>
             ${isCheckoutAvailable
-              ? `<a href="${escapeHtml(thrivecart_checkout_url)}" class="btn btn--primary btn--sm" target="_blank" rel="noopener noreferrer">Buy Now</a>`
-              : `<span class="btn btn--disabled btn--sm">Coming Soon</span>`
+              ? `<a href="${escapeHtml(thrivecart_checkout_url)}" class="card__buy-btn" target="_blank" rel="noopener noreferrer">
+                  <span>Add to Kit</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 20a1 1 0 1 0 0 2 1 1 0 0 0 0-2zM20 20a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                  </svg>
+                </a>`
+              : `<a href="/product.html?slug=${encodeURIComponent(slug)}" class="card__details-btn">
+                  <span>View Details</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </a>`
             }
           </div>
+        </div>
+        <div class="card__quality-seal">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+          </svg>
         </div>
       </article>
     `;
@@ -300,17 +457,24 @@ const Templates = (() => {
 
   // Public API
   return {
+    // Normalizers
+    normalizeListing,
+    normalizeProduct,
+    normalizePost,
+    // Utilities
     escapeHtml,
     truncate,
     formatDate,
     formatPrice,
     getPlaceholderImage,
+    // Card templates
     listingCard,
     postCard,
     productCard,
     categoryTab,
     cardSkeleton,
     loadingGrid,
+    // States
     emptyState,
     errorState,
     loading,

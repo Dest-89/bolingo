@@ -389,3 +389,31 @@ const UI = (() => {
 
 // Make UI available globally
 window.UI = UI;
+
+// Global image error handler - replace broken images with placeholder
+document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('error', (e) => {
+    if (e.target.tagName === 'IMG') {
+      const placeholders = {
+        listing: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&h=400&fit=crop',
+        blog: 'https://images.unsplash.com/photo-1541704328070-20bf4601ae3e?w=600&h=400&fit=crop',
+        product: 'https://images.unsplash.com/photo-1595590424283-b8f17842773f?w=600&h=400&fit=crop',
+        default: 'https://images.unsplash.com/photo-1516939884455-1445c8652f83?w=600&h=400&fit=crop'
+      };
+
+      // Determine placeholder based on context
+      const card = e.target.closest('.card');
+      let type = 'default';
+      if (card) {
+        if (card.classList.contains('card--listing')) type = 'listing';
+        else if (card.classList.contains('card--post')) type = 'blog';
+        else if (card.classList.contains('card--product')) type = 'product';
+      }
+
+      // Only replace if not already a placeholder (prevent infinite loop)
+      if (!e.target.src.includes('images.unsplash.com')) {
+        e.target.src = placeholders[type];
+      }
+    }
+  }, true);
+});

@@ -16,7 +16,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
 
   <!-- Styles -->
   <link rel="stylesheet" href="/assets/css/styles.css">
@@ -115,7 +115,7 @@
             </div>
             <div class="form-group">
               <label for="blog-post-category" class="form-label form-label--required">Category</label>
-              <select id="blog-post-category" name="category_slug" class="form-select" required>
+              <select id="blog-post-category" name="category_id" class="form-select" required>
                 <option value="">Loading categories...</option>
               </select>
               <button type="button" id="add-blog-category-inline" class="btn btn--ghost btn--sm" style="margin-top: var(--space-2);">
@@ -140,11 +140,11 @@
             </div>
             <div class="form-group">
               <label for="blog-post-content" class="form-label form-label--required">Content</label>
-              <textarea id="blog-post-content" name="content" class="form-textarea" rows="10" placeholder="Full post content..." required></textarea>
+              <textarea id="blog-post-content" name="content_md" class="form-textarea" rows="10" placeholder="Full post content..." required></textarea>
             </div>
             <div class="form-group">
               <label for="blog-post-image" class="form-label">Featured Image URL</label>
-              <input type="url" id="blog-post-image" name="image_url" class="form-input" placeholder="https://...">
+              <input type="url" id="blog-post-image" name="featured_image_url" class="form-input" placeholder="https://...">
             </div>
             <div class="form-group">
               <label for="blog-post-tags" class="form-label">Tags</label>
@@ -183,7 +183,7 @@
           <form id="form-store-product" novalidate>
             <div class="form-group">
               <label for="product-name" class="form-label form-label--required">Product Name</label>
-              <input type="text" id="product-name" name="name" class="form-input" placeholder="Product name" required>
+              <input type="text" id="product-name" name="title" class="form-input" placeholder="Product name" required>
             </div>
             <div class="form-group">
               <label for="product-slug" class="form-label form-label--required">Slug</label>
@@ -191,7 +191,7 @@
             </div>
             <div class="form-group">
               <label for="product-category" class="form-label form-label--required">Category</label>
-              <select id="product-category" name="category_slug" class="form-select" required>
+              <select id="product-category" name="category_id" class="form-select" required>
                 <option value="">Loading categories...</option>
               </select>
               <button type="button" id="add-store-category-inline" class="btn btn--ghost btn--sm" style="margin-top: var(--space-2);">
@@ -212,11 +212,11 @@
             </div>
             <div class="form-group">
               <label for="product-description" class="form-label">Description</label>
-              <textarea id="product-description" name="description" class="form-textarea" rows="4" placeholder="Product description"></textarea>
+              <textarea id="product-description" name="short_description" class="form-textarea" rows="4" placeholder="Product description"></textarea>
             </div>
             <div class="form-group">
               <label for="product-image" class="form-label">Image URL</label>
-              <input type="url" id="product-image" name="image_url" class="form-input" placeholder="https://...">
+              <input type="url" id="product-image" name="featured_image_url" class="form-input" placeholder="https://...">
             </div>
             <div class="form-group">
               <label for="product-thrivecart" class="form-label">ThriveCart Checkout URL</label>
@@ -302,12 +302,12 @@
             </div>
             <div class="form-group">
               <label for="listing-species" class="form-label">Species Available</label>
-              <input type="text" id="listing-species" name="species" class="form-input" placeholder="Whitetail Deer, Wild Turkey, Waterfowl">
+              <input type="text" id="listing-species" name="species_tags" class="form-input" placeholder="Whitetail Deer, Wild Turkey, Waterfowl">
               <p class="form-help">Comma-separated list of species</p>
             </div>
             <div class="form-group">
               <label for="listing-description" class="form-label">Description</label>
-              <textarea id="listing-description" name="description" class="form-textarea" rows="4" placeholder="Detailed description of the hunting location"></textarea>
+              <textarea id="listing-description" name="description_md" class="form-textarea" rows="4" placeholder="Detailed description of the hunting location"></textarea>
             </div>
             <div class="form-group">
               <label for="listing-regulations" class="form-label">Regulations & Notes</label>
@@ -320,15 +320,15 @@
             </div>
             <div class="form-group">
               <label for="listing-image" class="form-label">Image URL</label>
-              <input type="url" id="listing-image" name="image_url" class="form-input" placeholder="https://...">
+              <input type="url" id="listing-image" name="featured_image_url" class="form-input" placeholder="https://...">
             </div>
             <div class="form-group">
               <label for="listing-website" class="form-label">Website</label>
-              <input type="url" id="listing-website" name="website" class="form-input" placeholder="https://...">
+              <input type="url" id="listing-website" name="website_url" class="form-input" placeholder="https://...">
             </div>
             <div class="form-group">
               <label for="listing-contact" class="form-label">Contact Info</label>
-              <input type="text" id="listing-contact" name="contact_info" class="form-input" placeholder="Phone number or email">
+              <input type="text" id="listing-contact" name="contact_email" class="form-input" placeholder="Email address">
             </div>
             <div id="msg-directory-listing" style="display: none;" role="alert"></div>
             <button type="submit" class="btn btn--primary">Create Listing</button>

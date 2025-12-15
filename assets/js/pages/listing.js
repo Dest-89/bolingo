@@ -10,6 +10,8 @@
    * Render listing detail
    */
   function renderListing(listing) {
+    // Normalize the data from API
+    const normalized = Templates.normalizeListing(listing);
     const {
       name = 'Unnamed Location',
       description = '',
@@ -26,7 +28,7 @@
       contact_info = '',
       website = '',
       image_url = ''
-    } = listing;
+    } = normalized;
 
     const imageUrl = image_url || Templates.getPlaceholderImage('listing');
     const speciesArray = Array.isArray(species) ? species : (species ? species.split(',').map(s => s.trim()) : []);
@@ -173,21 +175,24 @@
         throw new Error('Listing not found');
       }
 
+      // Normalize listing data
+      const normalizedListing = Templates.normalizeListing(listing);
+
       // Update page content
       contentEl.innerHTML = renderListing(listing);
       contentEl.setAttribute('aria-busy', 'false');
 
       // Update page title and breadcrumb
-      titleEl.textContent = listing.name;
-      breadcrumbEl.textContent = listing.name;
+      titleEl.textContent = normalizedListing.name;
+      breadcrumbEl.textContent = normalizedListing.name;
 
       // Update SEO
       UI.setPageMeta({
-        title: listing.name,
-        description: listing.description || `Hunting location: ${listing.name} in ${listing.city || ''}, ${listing.state || ''}`,
-        ogTitle: listing.name,
-        ogDescription: listing.description,
-        ogImage: listing.image_url,
+        title: normalizedListing.name,
+        description: normalizedListing.description || `Hunting location: ${normalizedListing.name} in ${normalizedListing.city || ''}, ${normalizedListing.state || ''}`,
+        ogTitle: normalizedListing.name,
+        ogDescription: normalizedListing.description,
+        ogImage: normalizedListing.image_url,
         canonical: `https://bolingo.com/listing.html?slug=${encodeURIComponent(slug)}`
       });
 

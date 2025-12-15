@@ -105,6 +105,7 @@ const API = (() => {
 
   /**
    * Generic POST request (admin only)
+   * Note: Uses query param for token due to Google Apps Script CORS limitations
    */
   async function post(endpoint, body = {}) {
     const token = getAdminToken();
@@ -113,25 +114,35 @@ const API = (() => {
       throw new Error('Admin token is required. Please set your token first.');
     }
 
-    const url = buildUrl(endpoint);
+    // Build URL with admin_token as query param (GAS CORS workaround)
+    const url = new URL(BASE_URL);
+    url.searchParams.set('path', endpoint);
+    url.searchParams.set('admin_token', token);
 
     try {
-      const response = await fetchWithTimeout(url, {
+      const response = await fetchWithTimeout(url.toString(), {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'X-ADMIN-TOKEN': token
+          'Content-Type': 'text/plain'  // Avoid preflight
         },
         body: JSON.stringify(body)
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      // Google Apps Script returns 200 even for redirects, so we need to handle this
+      const text = await response.text();
+
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch {
+        // If response is HTML (redirect), try to extract error or throw generic error
+        if (text.includes('<!DOCTYPE') || text.includes('<html')) {
+          throw new Error('API redirect error. Please check your Google Apps Script deployment.');
+        }
+        throw new Error('Invalid response from API');
       }
 
-      const data = await response.json();
-
-      if (data.error) {
+      if (!data.ok && data.error) {
         throw new Error(data.error);
       }
 

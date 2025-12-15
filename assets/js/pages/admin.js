@@ -148,7 +148,8 @@
 
       select.innerHTML = '<option value="">Select category...</option>';
       categories.forEach(cat => {
-        select.innerHTML += `<option value="${Templates.escapeHtml(cat.slug)}">${Templates.escapeHtml(cat.name)}</option>`;
+        // Use category_id as value (API requires category_id, not slug)
+        select.innerHTML += `<option value="${Templates.escapeHtml(cat.category_id)}">${Templates.escapeHtml(cat.name)}</option>`;
       });
     } catch (error) {
       console.error('Error loading blog categories:', error);
@@ -169,7 +170,8 @@
 
       select.innerHTML = '<option value="">Select category...</option>';
       categories.forEach(cat => {
-        select.innerHTML += `<option value="${Templates.escapeHtml(cat.slug)}">${Templates.escapeHtml(cat.name)}</option>`;
+        // Use category_id as value (API requires category_id, not slug)
+        select.innerHTML += `<option value="${Templates.escapeHtml(cat.category_id)}">${Templates.escapeHtml(cat.name)}</option>`;
       });
     } catch (error) {
       console.error('Error loading store categories:', error);

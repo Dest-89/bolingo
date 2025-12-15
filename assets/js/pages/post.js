@@ -49,6 +49,8 @@
    * Render post detail
    */
   function renderPost(post) {
+    // Normalize the data from API
+    const normalized = Templates.normalizePost(post);
     const {
       title = 'Untitled Post',
       content = '',
@@ -59,7 +61,7 @@
       category_slug = '',
       image_url = '',
       tags = []
-    } = post;
+    } = normalized;
 
     const imageUrl = image_url || Templates.getPlaceholderImage('blog');
     const tagsArray = Array.isArray(tags) ? tags : (tags ? tags.split(',').map(t => t.trim()) : []);
@@ -162,27 +164,30 @@
         throw new Error('Post not found');
       }
 
+      // Normalize post data
+      const normalizedPost = Templates.normalizePost(post);
+
       // Update page content
       contentEl.innerHTML = renderPost(post);
       contentEl.setAttribute('aria-busy', 'false');
 
       // Update page title and breadcrumb
-      titleEl.textContent = post.title;
-      breadcrumbEl.textContent = Templates.truncate(post.title, 30);
+      titleEl.textContent = normalizedPost.title;
+      breadcrumbEl.textContent = Templates.truncate(normalizedPost.title, 30);
 
       // Update SEO
       UI.setPageMeta({
-        title: post.title,
-        description: post.excerpt || Templates.truncate(post.content, 160),
-        ogTitle: post.title,
-        ogDescription: post.excerpt || Templates.truncate(post.content, 160),
-        ogImage: post.image_url,
+        title: normalizedPost.title,
+        description: normalizedPost.excerpt || Templates.truncate(normalizedPost.content, 160),
+        ogTitle: normalizedPost.title,
+        ogDescription: normalizedPost.excerpt || Templates.truncate(normalizedPost.content, 160),
+        ogImage: normalizedPost.image_url,
         canonical: `https://bolingo.com/post.html?slug=${encodeURIComponent(slug)}`
       });
 
       // Store current URL for sharing
       window.currentPostUrl = window.location.href;
-      window.currentPostTitle = post.title;
+      window.currentPostTitle = normalizedPost.title;
 
     } catch (error) {
       console.error('Error loading post:', error);
