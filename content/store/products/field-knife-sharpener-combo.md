@@ -4,7 +4,7 @@ title: "Field Knife + Sharpener Combo"
 category_slug: field-essentials
 category_name: "Field Category"
 price: 29.99
-featured_image_url: "https://images.unsplash.com/photo-1622017911841-4e2b6a589c2f?w=800&h=600&fit=crop"
+featured_image_url: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=800&h=600&fit=crop"
 thrivecart_checkout_url: ""
 sku: "P_0006"
 brand: "BOLINGO"
