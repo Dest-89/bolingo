@@ -1,22 +1,22 @@
 [
   {
-    "slug": "optics",
-    "name": "Optics",
-    "description": "Binoculars, scopes, and rangefinders for precision hunting"
+    "slug": "optics-glass",
+    "name": "Optics & Glass",
+    "description": "Binoculars, scopes, mounts, rangefinders—see more, miss less."
   },
   {
-    "slug": "apparel",
-    "name": "Apparel",
-    "description": "Camouflage clothing and hunting wear for all seasons"
+    "slug": "field-essentials",
+    "name": "Field Essentials",
+    "description": "Packs, knives, headlamps, kits—stuff you actually use."
   },
   {
-    "slug": "accessories",
-    "name": "Accessories",
-    "description": "Essential hunting accessories and gear"
+    "slug": "apparel-footwear",
+    "name": "Apparel & Footwear",
+    "description": "Layers, boots, gloves, rain gear—comfort buys time outside."
   },
   {
-    "slug": "calls-decoys",
-    "name": "Calls & Decoys",
-    "description": "Game calls, decoys, and attractants"
+    "slug": "game-processing",
+    "name": "Game Processing",
+    "description": "Gloves, bags, sharpeners, grinders—clean, fast, and safe."
   }
 ]
