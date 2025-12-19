@@ -4,7 +4,7 @@ title: "Nitrile Gloves Bulk Pack"
 category_slug: game-processing
 category_name: "Nitrile Category"
 price: 29.99
-featured_image_url: "https://images.unsplash.com/photo-1609859419540-c9cc46f0b1fb?w=800&h=600&fit=crop"
+featured_image_url: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&h=600&fit=crop"
 thrivecart_checkout_url: ""
 sku: "P_0014"
 brand: "BOLINGO"
