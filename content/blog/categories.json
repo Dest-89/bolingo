@@ -1,0 +1,22 @@
+[
+  {
+    "slug": "hunting-tips",
+    "name": "Hunting Tips",
+    "description": "Expert advice and strategies for hunters of all skill levels"
+  },
+  {
+    "slug": "gear-reviews",
+    "name": "Gear Reviews",
+    "description": "In-depth reviews of hunting equipment and accessories"
+  },
+  {
+    "slug": "conservation",
+    "name": "Conservation",
+    "description": "Wildlife conservation efforts and sustainable hunting practices"
+  },
+  {
+    "slug": "local-spots",
+    "name": "Local Spots",
+    "description": "Discover the best hunting locations in the Hampton Roads region"
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "slug": "optics",
+    "name": "Optics",
+    "description": "Binoculars, scopes, and rangefinders for precision hunting"
+  },
+  {
+    "slug": "apparel",
+    "name": "Apparel",
+    "description": "Camouflage clothing and hunting wear for all seasons"
+  },
+  {
+    "slug": "accessories",
+    "name": "Accessories",
+    "description": "Essential hunting accessories and gear"
+  },
+  {
+    "slug": "calls-decoys",
+    "name": "Calls & Decoys",
+    "description": "Game calls, decoys, and attractants"
+  }
+]

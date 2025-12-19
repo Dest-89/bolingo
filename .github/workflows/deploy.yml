@@ -1,0 +1,49 @@
+# BOLINGO - GitHub Pages Deployment Workflow
+# Automatically deploys to GitHub Pages when changes are pushed to main branch
+
+name: Deploy to GitHub Pages
+
+on:
+  # Trigger on pushes to main branch
+  push:
+    branches:
+      - main
+
+  # Allow manual trigger from Actions tab
+  workflow_dispatch:
+
+# Sets permissions for GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload entire repository (static site)
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
   <!-- SEO Meta Tags -->
-  <title>Admin Portal | BOLINGO</title>
-  <meta name="description" content="BOLINGO admin portal for managing directory listings, blog posts, and store products.">
+  <title>Admin Dashboard | BOLINGO</title>
+  <meta name="description" content="BOLINGO admin dashboard for managing directory listings, blog posts, and store products.">
   <meta name="robots" content="noindex, nofollow">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23D4A857'%3E%3Cpath d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23C9A227'%3E%3Cpath d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/%3E%3C/svg%3E">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,333 +20,1553 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="assets/css/styles.css">
+  <style>
+    /* Admin Dashboard Styles */
+    :root {
+      --admin-sidebar-width: 260px;
+      --admin-header-height: 64px;
+    }
+
+    body.admin-body {
+      background: var(--color-bg-dark);
+      min-height: 100vh;
+    }
+
+    /* Admin Layout */
+    .admin-layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .admin-sidebar {
+      width: var(--admin-sidebar-width);
+      background: var(--color-bg-card);
+      border-right: 1px solid rgba(201, 162, 39, 0.1);
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease;
+    }
+
+    .admin-sidebar__brand {
+      padding: var(--space-5);
+      border-bottom: 1px solid rgba(201, 162, 39, 0.1);
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .admin-sidebar__logo {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .admin-sidebar__logo svg {
+      width: 24px;
+      height: 24px;
+      color: var(--color-bg-dark);
+    }
+
+    .admin-sidebar__title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--color-primary);
+      letter-spacing: 0.05em;
+    }
+
+    .admin-sidebar__nav {
+      flex: 1;
+      padding: var(--space-4) 0;
+      overflow-y: auto;
+    }
+
+    .admin-nav-section {
+      padding: var(--space-2) var(--space-4);
+    }
+
+    .admin-nav-section__title {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-2);
+      padding: 0 var(--space-3);
+    }
+
+    .admin-nav-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-3) var(--space-4);
+      color: var(--color-text-muted);
+      text-decoration: none;
+      border-radius: var(--radius-md);
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+
+    .admin-nav-item:hover {
+      background: rgba(201, 162, 39, 0.1);
+      color: var(--color-text);
+    }
+
+    .admin-nav-item.active {
+      background: rgba(201, 162, 39, 0.15);
+      color: var(--color-primary);
+    }
+
+    .admin-nav-item svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+
+    .admin-nav-item__badge {
+      margin-left: auto;
+      background: var(--color-primary);
+      color: var(--color-bg-dark);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+
+    /* Main Content */
+    .admin-main {
+      flex: 1;
+      margin-left: var(--admin-sidebar-width);
+      min-height: 100vh;
+    }
+
+    /* Admin Header */
+    .admin-header {
+      height: var(--admin-header-height);
+      background: var(--color-bg-card);
+      border-bottom: 1px solid rgba(201, 162, 39, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--space-6);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .admin-header__title {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      color: var(--color-text);
+      letter-spacing: 0.02em;
+    }
+
+    .admin-header__actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .admin-header__user {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-2) var(--space-3);
+      background: rgba(201, 162, 39, 0.1);
+      border-radius: var(--radius-md);
+    }
+
+    .admin-header__avatar {
+      width: 32px;
+      height: 32px;
+      background: var(--color-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-bg-dark);
+    }
+
+    .admin-header__name {
+      font-size: 0.9rem;
+      color: var(--color-text);
+    }
+
+    /* Content Area */
+    .admin-content {
+      padding: var(--space-6);
+    }
+
+    /* Stats Cards */
+    .admin-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: var(--space-5);
+      margin-bottom: var(--space-6);
+    }
+
+    .admin-stat-card {
+      background: var(--color-bg-card);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+      border: 1px solid rgba(201, 162, 39, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .admin-stat-card:hover {
+      border-color: rgba(201, 162, 39, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .admin-stat-card__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-3);
+    }
+
+    .admin-stat-card__icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .admin-stat-card__icon--blog {
+      background: rgba(201, 162, 39, 0.15);
+      color: var(--color-primary);
+    }
+
+    .admin-stat-card__icon--store {
+      background: rgba(42, 74, 26, 0.3);
+      color: var(--color-secondary);
+    }
+
+    .admin-stat-card__icon--directory {
+      background: rgba(139, 69, 19, 0.2);
+      color: var(--color-accent);
+    }
+
+    .admin-stat-card__icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .admin-stat-card__value {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      color: var(--color-text);
+      line-height: 1;
+    }
+
+    .admin-stat-card__label {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      margin-top: var(--space-2);
+    }
+
+    .admin-stat-card__link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      margin-top: var(--space-4);
+      color: var(--color-primary);
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: gap 0.2s ease;
+    }
+
+    .admin-stat-card__link:hover {
+      gap: var(--space-3);
+    }
+
+    /* Content Panel */
+    .admin-panel {
+      display: none;
+    }
+
+    .admin-panel.active {
+      display: block;
+    }
+
+    /* Table Card */
+    .admin-table-card {
+      background: var(--color-bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(201, 162, 39, 0.1);
+      overflow: hidden;
+    }
+
+    .admin-table-card__header {
+      padding: var(--space-5);
+      border-bottom: 1px solid rgba(201, 162, 39, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+    }
+
+    .admin-table-card__title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      color: var(--color-text);
+      letter-spacing: 0.02em;
+    }
+
+    .admin-table-card__actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    /* Search Input */
+    .admin-search {
+      position: relative;
+    }
+
+    .admin-search__input {
+      background: var(--color-bg-darker);
+      border: 1px solid rgba(201, 162, 39, 0.2);
+      border-radius: var(--radius-md);
+      padding: var(--space-2) var(--space-4);
+      padding-left: var(--space-10);
+      color: var(--color-text);
+      font-family: inherit;
+      font-size: 0.9rem;
+      width: 280px;
+      transition: all 0.2s ease;
+    }
+
+    .admin-search__input:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 2px rgba(201, 162, 39, 0.1);
+    }
+
+    .admin-search__icon {
+      position: absolute;
+      left: var(--space-3);
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--color-text-muted);
+    }
+
+    /* Filter Select */
+    .admin-filter {
+      background: var(--color-bg-darker);
+      border: 1px solid rgba(201, 162, 39, 0.2);
+      border-radius: var(--radius-md);
+      padding: var(--space-2) var(--space-4);
+      color: var(--color-text);
+      font-family: inherit;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    /* Add Button */
+    .admin-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-4);
+      border-radius: var(--radius-md);
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      border: none;
+    }
+
+    .admin-btn--primary {
+      background: var(--color-primary);
+      color: var(--color-bg-dark);
+    }
+
+    .admin-btn--primary:hover {
+      background: #d4af37;
+      transform: translateY(-1px);
+    }
+
+    .admin-btn--secondary {
+      background: rgba(201, 162, 39, 0.15);
+      color: var(--color-primary);
+    }
+
+    .admin-btn--secondary:hover {
+      background: rgba(201, 162, 39, 0.25);
+    }
+
+    .admin-btn--danger {
+      background: rgba(220, 53, 69, 0.15);
+      color: #dc3545;
+    }
+
+    .admin-btn--danger:hover {
+      background: rgba(220, 53, 69, 0.25);
+    }
+
+    .admin-btn--ghost {
+      background: transparent;
+      color: var(--color-text-muted);
+    }
+
+    .admin-btn--ghost:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--color-text);
+    }
+
+    .admin-btn--sm {
+      padding: var(--space-1) var(--space-2);
+      font-size: 0.8rem;
+    }
+
+    /* Table */
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .admin-table th,
+    .admin-table td {
+      padding: var(--space-4);
+      text-align: left;
+      border-bottom: 1px solid rgba(201, 162, 39, 0.1);
+    }
+
+    .admin-table th {
+      background: var(--color-bg-darker);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-muted);
+      font-weight: 500;
+    }
+
+    .admin-table td {
+      color: var(--color-text);
+      font-size: 0.9rem;
+    }
+
+    .admin-table tr:hover td {
+      background: rgba(201, 162, 39, 0.03);
+    }
+
+    .admin-table__item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .admin-table__thumb {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-sm);
+      object-fit: cover;
+      background: var(--color-bg-darker);
+    }
+
+    .admin-table__title {
+      font-weight: 500;
+      color: var(--color-text);
+    }
+
+    .admin-table__subtitle {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+    }
+
+    .admin-table__badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .admin-table__badge--published {
+      background: rgba(42, 74, 26, 0.3);
+      color: #4ade80;
+    }
+
+    .admin-table__badge--draft {
+      background: rgba(201, 162, 39, 0.2);
+      color: var(--color-primary);
+    }
+
+    .admin-table__badge--active {
+      background: rgba(42, 74, 26, 0.3);
+      color: #4ade80;
+    }
+
+    .admin-table__badge--inactive {
+      background: rgba(220, 53, 69, 0.15);
+      color: #dc3545;
+    }
+
+    .admin-table__actions {
+      display: flex;
+      gap: var(--space-2);
+    }
+
+    .admin-table__btn {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      border: none;
+      background: transparent;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .admin-table__btn:hover {
+      background: rgba(201, 162, 39, 0.1);
+      color: var(--color-primary);
+    }
+
+    .admin-table__btn--delete:hover {
+      background: rgba(220, 53, 69, 0.1);
+      color: #dc3545;
+    }
+
+    /* Empty State */
+    .admin-empty {
+      padding: var(--space-10);
+      text-align: center;
+    }
+
+    .admin-empty__icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto var(--space-4);
+      background: rgba(201, 162, 39, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-primary);
+    }
+
+    .admin-empty__title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      color: var(--color-text);
+      margin-bottom: var(--space-2);
+    }
+
+    .admin-empty__text {
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-5);
+    }
+
+    /* Modal */
+    .admin-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-4);
+    }
+
+    .admin-modal.active {
+      display: flex;
+    }
+
+    .admin-modal__content {
+      background: var(--color-bg-card);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 640px;
+      max-height: 90vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(201, 162, 39, 0.2);
+    }
+
+    .admin-modal__content--lg {
+      max-width: 800px;
+    }
+
+    .admin-modal__header {
+      padding: var(--space-5);
+      border-bottom: 1px solid rgba(201, 162, 39, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .admin-modal__title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--color-text);
+      letter-spacing: 0.02em;
+    }
+
+    .admin-modal__close {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      border: none;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--color-text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .admin-modal__close:hover {
+      background: rgba(220, 53, 69, 0.1);
+      color: #dc3545;
+    }
+
+    .admin-modal__body {
+      padding: var(--space-5);
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .admin-modal__footer {
+      padding: var(--space-4) var(--space-5);
+      border-top: 1px solid rgba(201, 162, 39, 0.1);
+      display: flex;
+      justify-content: flex-end;
+      gap: var(--space-3);
+    }
+
+    /* Form Styles */
+    .admin-form-group {
+      margin-bottom: var(--space-4);
+    }
+
+    .admin-form-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-4);
+    }
+
+    .admin-form-label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--color-text);
+      margin-bottom: var(--space-2);
+    }
+
+    .admin-form-label--required::after {
+      content: '*';
+      color: #dc3545;
+      margin-left: 4px;
+    }
+
+    .admin-form-input,
+    .admin-form-textarea,
+    .admin-form-select {
+      width: 100%;
+      background: var(--color-bg-darker);
+      border: 1px solid rgba(201, 162, 39, 0.2);
+      border-radius: var(--radius-md);
+      padding: var(--space-3);
+      color: var(--color-text);
+      font-family: inherit;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+
+    .admin-form-input:focus,
+    .admin-form-textarea:focus,
+    .admin-form-select:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.1);
+    }
+
+    .admin-form-textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .admin-form-help {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      margin-top: var(--space-1);
+    }
+
+    /* Image Upload */
+    .admin-image-upload {
+      border: 2px dashed rgba(201, 162, 39, 0.3);
+      border-radius: var(--radius-md);
+      padding: var(--space-6);
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: var(--color-bg-darker);
+    }
+
+    .admin-image-upload:hover,
+    .admin-image-upload.dragover {
+      border-color: var(--color-primary);
+      background: rgba(201, 162, 39, 0.05);
+    }
+
+    .admin-image-upload__icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto var(--space-3);
+      background: rgba(201, 162, 39, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-primary);
+    }
+
+    .admin-image-upload__text {
+      color: var(--color-text);
+      margin-bottom: var(--space-1);
+    }
+
+    .admin-image-upload__hint {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+    }
+
+    .admin-image-upload__preview {
+      margin-top: var(--space-4);
+      display: none;
+    }
+
+    .admin-image-upload__preview.active {
+      display: block;
+    }
+
+    .admin-image-upload__preview img {
+      max-width: 200px;
+      max-height: 150px;
+      border-radius: var(--radius-sm);
+      object-fit: cover;
+    }
+
+    .admin-image-upload__input {
+      display: none;
+    }
+
+    /* Toast */
+    .admin-toast-container {
+      position: fixed;
+      bottom: var(--space-6);
+      right: var(--space-6);
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+
+    .admin-toast {
+      background: var(--color-bg-card);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(201, 162, 39, 0.2);
+      animation: slideIn 0.3s ease;
+      min-width: 300px;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .admin-toast__icon {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    .admin-toast--success .admin-toast__icon {
+      color: #4ade80;
+    }
+
+    .admin-toast--error .admin-toast__icon {
+      color: #dc3545;
+    }
+
+    .admin-toast__message {
+      flex: 1;
+      color: var(--color-text);
+      font-size: 0.9rem;
+    }
+
+    .admin-toast__close {
+      width: 24px;
+      height: 24px;
+      border-radius: var(--radius-sm);
+      border: none;
+      background: transparent;
+      color: var(--color-text-muted);
+      cursor: pointer;
+    }
+
+    /* Loading Overlay */
+    .admin-loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 3000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .admin-loading.active {
+      display: flex;
+    }
+
+    .admin-loading__spinner {
+      width: 48px;
+      height: 48px;
+      border: 3px solid rgba(201, 162, 39, 0.2);
+      border-top-color: var(--color-primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Login Screen */
+    .admin-login {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--color-bg-dark);
+      z-index: 5000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .admin-login.hidden {
+      display: none;
+    }
+
+    .admin-login__card {
+      background: var(--color-bg-card);
+      border-radius: var(--radius-lg);
+      padding: var(--space-8);
+      width: 100%;
+      max-width: 400px;
+      border: 1px solid rgba(201, 162, 39, 0.2);
+      text-align: center;
+    }
+
+    .admin-login__logo {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto var(--space-5);
+    }
+
+    .admin-login__logo svg {
+      width: 36px;
+      height: 36px;
+      color: var(--color-bg-dark);
+    }
+
+    .admin-login__title {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      color: var(--color-primary);
+      letter-spacing: 0.05em;
+      margin-bottom: var(--space-2);
+    }
+
+    .admin-login__subtitle {
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-6);
+    }
+
+    .admin-login__input {
+      width: 100%;
+      background: var(--color-bg-darker);
+      border: 1px solid rgba(201, 162, 39, 0.2);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+      color: var(--color-text);
+      font-family: inherit;
+      font-size: 1rem;
+      margin-bottom: var(--space-4);
+      text-align: center;
+    }
+
+    .admin-login__input:focus {
+      outline: none;
+      border-color: var(--color-primary);
+    }
+
+    .admin-login__btn {
+      width: 100%;
+      padding: var(--space-4);
+      font-size: 1rem;
+    }
+
+    .admin-login__error {
+      color: #dc3545;
+      font-size: 0.9rem;
+      margin-top: var(--space-3);
+      display: none;
+    }
+
+    .admin-login__error.active {
+      display: block;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .admin-sidebar {
+        transform: translateX(-100%);
+      }
+
+      .admin-sidebar.open {
+        transform: translateX(0);
+      }
+
+      .admin-main {
+        margin-left: 0;
+      }
+
+      .admin-form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Delete Confirmation Modal */
+    .admin-confirm {
+      text-align: center;
+      padding: var(--space-4) 0;
+    }
+
+    .admin-confirm__icon {
+      width: 64px;
+      height: 64px;
+      background: rgba(220, 53, 69, 0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto var(--space-4);
+      color: #dc3545;
+    }
+
+    .admin-confirm__title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--color-text);
+      margin-bottom: var(--space-2);
+    }
+
+    .admin-confirm__text {
+      color: var(--color-text-muted);
+    }
+
+    .admin-confirm__item {
+      background: var(--color-bg-darker);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+      margin: var(--space-4) 0;
+      font-weight: 500;
+      color: var(--color-primary);
+    }
+
+    /* Categories Section */
+    .admin-categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: var(--space-4);
+      margin-bottom: var(--space-6);
+    }
+
+    .admin-category-card {
+      background: var(--color-bg-darker);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+      border: 1px solid rgba(201, 162, 39, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .admin-category-card__name {
+      font-weight: 500;
+      color: var(--color-text);
+    }
+
+    .admin-category-card__actions {
+      display: flex;
+      gap: var(--space-1);
+    }
+
+    /* Mobile menu toggle */
+    .admin-menu-toggle {
+      display: none;
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-md);
+      border: none;
+      background: rgba(201, 162, 39, 0.15);
+      color: var(--color-primary);
+      cursor: pointer;
+    }
+
+    @media (max-width: 1024px) {
+      .admin-menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    /* Pagination */
+    .admin-pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      padding: var(--space-4);
+      border-top: 1px solid rgba(201, 162, 39, 0.1);
+    }
+
+    .admin-pagination__btn {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(201, 162, 39, 0.2);
+      background: transparent;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .admin-pagination__btn:hover:not(:disabled) {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+
+    .admin-pagination__btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .admin-pagination__btn.active {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      color: var(--color-bg-dark);
+    }
+
+    .admin-pagination__info {
+      color: var(--color-text-muted);
+      font-size: 0.85rem;
+      margin: 0 var(--space-3);
+    }
+  </style>
 </head>
-<body>
-  <!-- Header Placeholder -->
-  <div id="header-placeholder"></div>
-
-  <main id="main-content">
-    <!-- Page Header -->
-    <section class="page-header">
-      <div class="container">
-        <h1 class="page-header__title">Admin Portal</h1>
-        <nav class="page-header__breadcrumb" aria-label="Breadcrumb">
-          <a href="/">Home</a>
-          <span aria-hidden="true">/</span>
-          <span aria-current="page">Admin</span>
-        </nav>
+<body class="admin-body">
+  <!-- Login Screen -->
+  <div class="admin-login" id="login-screen">
+    <div class="admin-login__card">
+      <div class="admin-login__logo">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
       </div>
-    </section>
+      <h1 class="admin-login__title">BOLINGO</h1>
+      <p class="admin-login__subtitle">Admin Dashboard</p>
+      <input type="password" id="login-token" class="admin-login__input" placeholder="Enter GitHub Token">
+      <button type="button" id="login-btn" class="admin-btn admin-btn--primary admin-login__btn">
+        Sign In
+      </button>
+      <p class="admin-login__error" id="login-error">Invalid token. Please try again.</p>
+    </div>
+  </div>
 
-    <!-- Admin Content -->
-    <section class="admin">
-      <div class="container">
-        <!-- Token Configuration -->
-        <div class="admin__token">
-          <h2 style="margin-bottom: var(--space-4);">Admin Authentication</h2>
-          <div class="form-group" style="margin-bottom: var(--space-3);">
-            <label for="admin-token" class="form-label">Admin Token</label>
-            <input
-              type="password"
-              id="admin-token"
-              class="form-input"
-              placeholder="Enter your admin token"
-              autocomplete="off"
-            >
-            <p class="form-help">Your token is stored locally and never sent except with POST requests.</p>
+  <!-- Admin Layout -->
+  <div class="admin-layout" id="admin-layout" style="display: none;">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="admin-sidebar">
+      <div class="admin-sidebar__brand">
+        <div class="admin-sidebar__logo">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <span class="admin-sidebar__title">BOLINGO</span>
+      </div>
+
+      <nav class="admin-sidebar__nav">
+        <div class="admin-nav-section">
+          <button class="admin-nav-item active" data-panel="dashboard">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="9"/>
+              <rect x="14" y="3" width="7" height="5"/>
+              <rect x="14" y="12" width="7" height="9"/>
+              <rect x="3" y="16" width="7" height="5"/>
+            </svg>
+            Dashboard
+          </button>
+        </div>
+
+        <div class="admin-nav-section">
+          <p class="admin-nav-section__title">Content</p>
+          <button class="admin-nav-item" data-panel="blog">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 20h9"/>
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+            </svg>
+            Blog
+            <span class="admin-nav-item__badge" id="blog-count">0</span>
+          </button>
+          <button class="admin-nav-item" data-panel="store">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="9" cy="21" r="1"/>
+              <circle cx="20" cy="21" r="1"/>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+            </svg>
+            Store
+            <span class="admin-nav-item__badge" id="store-count">0</span>
+          </button>
+          <button class="admin-nav-item" data-panel="directory">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            Directory
+            <span class="admin-nav-item__badge" id="directory-count">0</span>
+          </button>
+        </div>
+
+        <div class="admin-nav-section">
+          <p class="admin-nav-section__title">Settings</p>
+          <button class="admin-nav-item" data-panel="settings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+            Settings
+          </button>
+          <a href="/" class="admin-nav-item" target="_blank">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+              <polyline points="15 3 21 3 21 9"/>
+              <line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+            View Site
+          </a>
+          <button class="admin-nav-item" id="logout-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+              <polyline points="16 17 21 12 16 7"/>
+              <line x1="21" y1="12" x2="9" y2="12"/>
+            </svg>
+            Logout
+          </button>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <!-- Header -->
+      <header class="admin-header">
+        <button class="admin-menu-toggle" id="menu-toggle">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+        <h1 class="admin-header__title" id="header-title">Dashboard</h1>
+        <div class="admin-header__actions">
+          <div class="admin-header__user">
+            <div class="admin-header__avatar">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+            </div>
+            <span class="admin-header__name">Admin</span>
           </div>
-          <button id="save-token" class="btn btn--primary">Save Token</button>
-          <button id="clear-token" class="btn btn--ghost" style="margin-left: var(--space-2);">Clear Token</button>
-          <div id="token-status" class="admin__token-status" aria-live="polite"></div>
         </div>
+      </header>
 
-        <!-- Admin Tabs -->
-        <nav class="admin__tabs" role="tablist" aria-label="Admin sections">
-          <button class="admin__tab active" data-tab="blog-category" role="tab" aria-selected="true" aria-controls="panel-blog-category">
-            Blog Category
-          </button>
-          <button class="admin__tab" data-tab="blog-post" role="tab" aria-selected="false" aria-controls="panel-blog-post">
-            Blog Post
-          </button>
-          <button class="admin__tab" data-tab="store-category" role="tab" aria-selected="false" aria-controls="panel-store-category">
-            Store Category
-          </button>
-          <button class="admin__tab" data-tab="store-product" role="tab" aria-selected="false" aria-controls="panel-store-product">
-            Product
-          </button>
-          <button class="admin__tab" data-tab="directory-listing" role="tab" aria-selected="false" aria-controls="panel-directory-listing">
-            Directory Listing
-          </button>
-        </nav>
-
-        <!-- Panel: Blog Category -->
-        <div id="panel-blog-category" class="admin__panel active" role="tabpanel" aria-labelledby="tab-blog-category">
-          <h3 class="admin__form-title">Create Blog Category</h3>
-          <form id="form-blog-category" novalidate>
-            <div class="form-group">
-              <label for="blog-cat-name" class="form-label form-label--required">Category Name</label>
-              <input type="text" id="blog-cat-name" name="name" class="form-input" placeholder="e.g., Hunting Tips" required>
-            </div>
-            <div class="form-group">
-              <label for="blog-cat-slug" class="form-label form-label--required">Slug</label>
-              <input type="text" id="blog-cat-slug" name="slug" class="form-input" placeholder="e.g., hunting-tips" required>
-              <p class="form-help">URL-friendly identifier (lowercase, hyphens only)</p>
-            </div>
-            <div class="form-group">
-              <label for="blog-cat-description" class="form-label">Description</label>
-              <textarea id="blog-cat-description" name="description" class="form-textarea" placeholder="Brief description of this category"></textarea>
-            </div>
-            <div id="msg-blog-category" style="display: none;" role="alert"></div>
-            <button type="submit" class="btn btn--primary">Create Category</button>
-          </form>
-        </div>
-
-        <!-- Panel: Blog Post -->
-        <div id="panel-blog-post" class="admin__panel" role="tabpanel" aria-labelledby="tab-blog-post">
-          <h3 class="admin__form-title">Create Blog Post</h3>
-          <form id="form-blog-post" novalidate>
-            <div class="form-group">
-              <label for="blog-post-title" class="form-label form-label--required">Title</label>
-              <input type="text" id="blog-post-title" name="title" class="form-input" placeholder="Post title" required>
-            </div>
-            <div class="form-group">
-              <label for="blog-post-slug" class="form-label form-label--required">Slug</label>
-              <input type="text" id="blog-post-slug" name="slug" class="form-input" placeholder="post-url-slug" required>
-            </div>
-            <div class="form-group">
-              <label for="blog-post-category" class="form-label form-label--required">Category</label>
-              <select id="blog-post-category" name="category_id" class="form-select" required>
-                <option value="">Loading categories...</option>
-              </select>
-              <button type="button" id="add-blog-category-inline" class="btn btn--ghost btn--sm" style="margin-top: var(--space-2);">
-                + Add New Category
+      <!-- Content -->
+      <div class="admin-content">
+        <!-- Dashboard Panel -->
+        <div class="admin-panel active" id="panel-dashboard">
+          <div class="admin-stats">
+            <div class="admin-stat-card">
+              <div class="admin-stat-card__header">
+                <div class="admin-stat-card__icon admin-stat-card__icon--blog">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 20h9"/>
+                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="admin-stat-card__value" id="stat-posts">0</div>
+              <div class="admin-stat-card__label">Blog Posts</div>
+              <button class="admin-stat-card__link" data-panel="blog">
+                Manage Posts
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
               </button>
             </div>
-            <div id="inline-blog-category" style="display: none; background: var(--color-bg-darker); padding: var(--space-4); border-radius: var(--radius-md); margin-bottom: var(--space-4);">
-              <h4 style="margin-bottom: var(--space-3);">Quick Add Category</h4>
-              <div class="form-group">
-                <input type="text" id="inline-blog-cat-name" class="form-input" placeholder="New category name">
+
+            <div class="admin-stat-card">
+              <div class="admin-stat-card__header">
+                <div class="admin-stat-card__icon admin-stat-card__icon--store">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="9" cy="21" r="1"/>
+                    <circle cx="20" cy="21" r="1"/>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                  </svg>
+                </div>
               </div>
-              <button type="button" id="save-inline-blog-category" class="btn btn--primary btn--sm">Add Category</button>
-              <button type="button" id="cancel-inline-blog-category" class="btn btn--ghost btn--sm">Cancel</button>
-            </div>
-            <div class="form-group">
-              <label for="blog-post-author" class="form-label">Author</label>
-              <input type="text" id="blog-post-author" name="author" class="form-input" placeholder="Author name">
-            </div>
-            <div class="form-group">
-              <label for="blog-post-excerpt" class="form-label">Excerpt</label>
-              <textarea id="blog-post-excerpt" name="excerpt" class="form-textarea" rows="2" placeholder="Brief summary for previews"></textarea>
-            </div>
-            <div class="form-group">
-              <label for="blog-post-content" class="form-label form-label--required">Content</label>
-              <textarea id="blog-post-content" name="content_md" class="form-textarea" rows="10" placeholder="Full post content..." required></textarea>
-            </div>
-            <div class="form-group">
-              <label for="blog-post-image" class="form-label">Featured Image URL</label>
-              <input type="url" id="blog-post-image" name="featured_image_url" class="form-input" placeholder="https://...">
-            </div>
-            <div class="form-group">
-              <label for="blog-post-tags" class="form-label">Tags</label>
-              <input type="text" id="blog-post-tags" name="tags" class="form-input" placeholder="tag1, tag2, tag3">
-              <p class="form-help">Comma-separated tags</p>
-            </div>
-            <div id="msg-blog-post" style="display: none;" role="alert"></div>
-            <button type="submit" class="btn btn--primary">Create Post</button>
-          </form>
-        </div>
-
-        <!-- Panel: Store Category -->
-        <div id="panel-store-category" class="admin__panel" role="tabpanel" aria-labelledby="tab-store-category">
-          <h3 class="admin__form-title">Create Store Category</h3>
-          <form id="form-store-category" novalidate>
-            <div class="form-group">
-              <label for="store-cat-name" class="form-label form-label--required">Category Name</label>
-              <input type="text" id="store-cat-name" name="name" class="form-input" placeholder="e.g., Optics" required>
-            </div>
-            <div class="form-group">
-              <label for="store-cat-slug" class="form-label form-label--required">Slug</label>
-              <input type="text" id="store-cat-slug" name="slug" class="form-input" placeholder="e.g., optics" required>
-            </div>
-            <div class="form-group">
-              <label for="store-cat-description" class="form-label">Description</label>
-              <textarea id="store-cat-description" name="description" class="form-textarea" placeholder="Brief description of this category"></textarea>
-            </div>
-            <div id="msg-store-category" style="display: none;" role="alert"></div>
-            <button type="submit" class="btn btn--primary">Create Category</button>
-          </form>
-        </div>
-
-        <!-- Panel: Store Product -->
-        <div id="panel-store-product" class="admin__panel" role="tabpanel" aria-labelledby="tab-store-product">
-          <h3 class="admin__form-title">Create Product</h3>
-          <form id="form-store-product" novalidate>
-            <div class="form-group">
-              <label for="product-name" class="form-label form-label--required">Product Name</label>
-              <input type="text" id="product-name" name="title" class="form-input" placeholder="Product name" required>
-            </div>
-            <div class="form-group">
-              <label for="product-slug" class="form-label form-label--required">Slug</label>
-              <input type="text" id="product-slug" name="slug" class="form-input" placeholder="product-url-slug" required>
-            </div>
-            <div class="form-group">
-              <label for="product-category" class="form-label form-label--required">Category</label>
-              <select id="product-category" name="category_id" class="form-select" required>
-                <option value="">Loading categories...</option>
-              </select>
-              <button type="button" id="add-store-category-inline" class="btn btn--ghost btn--sm" style="margin-top: var(--space-2);">
-                + Add New Category
+              <div class="admin-stat-card__value" id="stat-products">0</div>
+              <div class="admin-stat-card__label">Products</div>
+              <button class="admin-stat-card__link" data-panel="store">
+                Manage Products
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
               </button>
             </div>
-            <div id="inline-store-category" style="display: none; background: var(--color-bg-darker); padding: var(--space-4); border-radius: var(--radius-md); margin-bottom: var(--space-4);">
-              <h4 style="margin-bottom: var(--space-3);">Quick Add Category</h4>
-              <div class="form-group">
-                <input type="text" id="inline-store-cat-name" class="form-input" placeholder="New category name">
+
+            <div class="admin-stat-card">
+              <div class="admin-stat-card__header">
+                <div class="admin-stat-card__icon admin-stat-card__icon--directory">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                  </svg>
+                </div>
               </div>
-              <button type="button" id="save-inline-store-category" class="btn btn--primary btn--sm">Add Category</button>
-              <button type="button" id="cancel-inline-store-category" class="btn btn--ghost btn--sm">Cancel</button>
+              <div class="admin-stat-card__value" id="stat-listings">0</div>
+              <div class="admin-stat-card__label">Directory Listings</div>
+              <button class="admin-stat-card__link" data-panel="directory">
+                Manage Listings
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </button>
             </div>
-            <div class="form-group">
-              <label for="product-price" class="form-label form-label--required">Price ($)</label>
-              <input type="number" id="product-price" name="price" class="form-input" placeholder="0.00" step="0.01" min="0" required>
+          </div>
+
+          <!-- Recent Activity placeholder -->
+          <div class="admin-table-card">
+            <div class="admin-table-card__header">
+              <h2 class="admin-table-card__title">Quick Actions</h2>
             </div>
-            <div class="form-group">
-              <label for="product-description" class="form-label">Description</label>
-              <textarea id="product-description" name="short_description" class="form-textarea" rows="4" placeholder="Product description"></textarea>
+            <div style="padding: var(--space-5); display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4);">
+              <button class="admin-btn admin-btn--secondary" onclick="AdminApp.openModal('post')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="12" y1="5" x2="12" y2="19"/>
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+                New Blog Post
+              </button>
+              <button class="admin-btn admin-btn--secondary" onclick="AdminApp.openModal('product')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="12" y1="5" x2="12" y2="19"/>
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+                New Product
+              </button>
+              <button class="admin-btn admin-btn--secondary" onclick="AdminApp.openModal('listing')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="12" y1="5" x2="12" y2="19"/>
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+                New Listing
+              </button>
             </div>
-            <div class="form-group">
-              <label for="product-image" class="form-label">Image URL</label>
-              <input type="url" id="product-image" name="featured_image_url" class="form-input" placeholder="https://...">
-            </div>
-            <div class="form-group">
-              <label for="product-thrivecart" class="form-label">ThriveCart Checkout URL</label>
-              <input type="url" id="product-thrivecart" name="thrivecart_checkout_url" class="form-input" placeholder="https://yourstore.thrivecart.com/...">
-              <p class="form-help">Leave blank to show "Coming Soon" on product page</p>
-            </div>
-            <div class="form-group">
-              <label for="product-sku" class="form-label">SKU</label>
-              <input type="text" id="product-sku" name="sku" class="form-input" placeholder="PROD-001">
-            </div>
-            <div class="form-group">
-              <label for="product-brand" class="form-label">Brand</label>
-              <input type="text" id="product-brand" name="brand" class="form-input" placeholder="Brand name">
-            </div>
-            <div id="msg-store-product" style="display: none;" role="alert"></div>
-            <button type="submit" class="btn btn--primary">Create Product</button>
-          </form>
+          </div>
         </div>
 
-        <!-- Panel: Directory Listing -->
-        <div id="panel-directory-listing" class="admin__panel" role="tabpanel" aria-labelledby="tab-directory-listing">
-          <h3 class="admin__form-title">Create Directory Listing</h3>
-          <form id="form-directory-listing" novalidate>
-            <div class="form-group">
-              <label for="listing-name" class="form-label form-label--required">Location Name</label>
-              <input type="text" id="listing-name" name="name" class="form-input" placeholder="e.g., Big Woods Wildlife Area" required>
+        <!-- Blog Panel -->
+        <div class="admin-panel" id="panel-blog">
+          <!-- Categories -->
+          <div class="admin-table-card" style="margin-bottom: var(--space-5);">
+            <div class="admin-table-card__header">
+              <h2 class="admin-table-card__title">Blog Categories</h2>
+              <button class="admin-btn admin-btn--secondary" onclick="AdminApp.openModal('blog-category')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="12" y1="5" x2="12" y2="19"/>
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+                Add Category
+              </button>
             </div>
-            <div class="form-group">
-              <label for="listing-slug" class="form-label form-label--required">Slug</label>
-              <input type="text" id="listing-slug" name="slug" class="form-input" placeholder="big-woods-wildlife-area" required>
+            <div class="admin-categories" id="blog-categories-list">
+              <!-- Categories loaded dynamically -->
             </div>
-            <div class="form-group">
-              <label for="listing-type" class="form-label form-label--required">Type</label>
-              <select id="listing-type" name="type" class="form-select" required>
-                <option value="">Select type...</option>
-                <option value="Public Land">Public Land</option>
-                <option value="Private Land">Private Land</option>
-                <option value="Wildlife Management Area">Wildlife Management Area</option>
-                <option value="National Forest">National Forest</option>
-                <option value="State Park">State Park</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="listing-access" class="form-label form-label--required">Access</label>
-              <select id="listing-access" name="access" class="form-select" required>
-                <option value="">Select access type...</option>
-                <option value="Free">Free</option>
-                <option value="Permit Required">Permit Required</option>
-                <option value="Paid Access">Paid Access</option>
-                <option value="Membership">Membership</option>
-              </select>
-            </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4);">
-              <div class="form-group">
-                <label for="listing-city" class="form-label">City</label>
-                <input type="text" id="listing-city" name="city" class="form-input" placeholder="Hampton">
+          </div>
+
+          <!-- Posts -->
+          <div class="admin-table-card">
+            <div class="admin-table-card__header">
+              <h2 class="admin-table-card__title">Blog Posts</h2>
+              <div class="admin-table-card__actions">
+                <div class="admin-search">
+                  <svg class="admin-search__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="M21 21l-4.35-4.35"/>
+                  </svg>
+                  <input type="text" class="admin-search__input" id="search-posts" placeholder="Search posts...">
+                </div>
+                <select class="admin-filter" id="filter-post-category">
+                  <option value="">All Categories</option>
+                </select>
+                <button class="admin-btn admin-btn--primary" onclick="AdminApp.openModal('post')">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19"/>
+                    <line x1="5" y1="12" x2="19" y2="12"/>
+                  </svg>
+                  New Post
+                </button>
               </div>
-              <div class="form-group">
-                <label for="listing-state" class="form-label form-label--required">State</label>
-                <select id="listing-state" name="state" class="form-select" required>
-                  <option value="">Select state...</option>
+            </div>
+            <div id="posts-list">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Post</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="posts-tbody">
+                  <!-- Posts loaded dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Store Panel -->
+        <div class="admin-panel" id="panel-store">
+          <!-- Categories -->
+          <div class="admin-table-card" style="margin-bottom: var(--space-5);">
+            <div class="admin-table-card__header">
+              <h2 class="admin-table-card__title">Store Categories</h2>
+              <button class="admin-btn admin-btn--secondary" onclick="AdminApp.openModal('store-category')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="12" y1="5" x2="12" y2="19"/>
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+                Add Category
+              </button>
+            </div>
+            <div class="admin-categories" id="store-categories-list">
+              <!-- Categories loaded dynamically -->
+            </div>
+          </div>
+
+          <!-- Products -->
+          <div class="admin-table-card">
+            <div class="admin-table-card__header">
+              <h2 class="admin-table-card__title">Products</h2>
+              <div class="admin-table-card__actions">
+                <div class="admin-search">
+                  <svg class="admin-search__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="M21 21l-4.35-4.35"/>
+                  </svg>
+                  <input type="text" class="admin-search__input" id="search-products" placeholder="Search products...">
+                </div>
+                <select class="admin-filter" id="filter-product-category">
+                  <option value="">All Categories</option>
+                </select>
+                <button class="admin-btn admin-btn--primary" onclick="AdminApp.openModal('product')">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19"/>
+                    <line x1="5" y1="12" x2="19" y2="12"/>
+                  </svg>
+                  New Product
+                </button>
+              </div>
+            </div>
+            <div id="products-list">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="products-tbody">
+                  <!-- Products loaded dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Directory Panel -->
+        <div class="admin-panel" id="panel-directory">
+          <div class="admin-table-card">
+            <div class="admin-table-card__header">
+              <h2 class="admin-table-card__title">Directory Listings</h2>
+              <div class="admin-table-card__actions">
+                <div class="admin-search">
+                  <svg class="admin-search__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="M21 21l-4.35-4.35"/>
+                  </svg>
+                  <input type="text" class="admin-search__input" id="search-listings" placeholder="Search listings...">
+                </div>
+                <select class="admin-filter" id="filter-listing-state">
+                  <option value="">All States</option>
                   <option value="VA">Virginia</option>
                   <option value="NC">North Carolina</option>
                   <option value="MD">Maryland</option>
                   <option value="WV">West Virginia</option>
                   <option value="PA">Pennsylvania</option>
                 </select>
+                <button class="admin-btn admin-btn--primary" onclick="AdminApp.openModal('listing')">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19"/>
+                    <line x1="5" y1="12" x2="19" y2="12"/>
+                  </svg>
+                  New Listing
+                </button>
               </div>
             </div>
-            <div class="form-group">
-              <label for="listing-address" class="form-label">Address</label>
-              <input type="text" id="listing-address" name="address" class="form-input" placeholder="Full street address">
+            <div id="listings-list">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Location</th>
+                    <th>Type</th>
+                    <th>State</th>
+                    <th>Access</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="listings-tbody">
+                  <!-- Listings loaded dynamically -->
+                </tbody>
+              </table>
             </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4);">
-              <div class="form-group">
-                <label for="listing-lat" class="form-label">Latitude</label>
-                <input type="text" id="listing-lat" name="latitude" class="form-input" placeholder="37.0299">
-              </div>
-              <div class="form-group">
-                <label for="listing-lng" class="form-label">Longitude</label>
-                <input type="text" id="listing-lng" name="longitude" class="form-input" placeholder="-76.3452">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="listing-species" class="form-label">Species Available</label>
-              <input type="text" id="listing-species" name="species_tags" class="form-input" placeholder="Whitetail Deer, Wild Turkey, Waterfowl">
-              <p class="form-help">Comma-separated list of species</p>
-            </div>
-            <div class="form-group">
-              <label for="listing-description" class="form-label">Description</label>
-              <textarea id="listing-description" name="description_md" class="form-textarea" rows="4" placeholder="Detailed description of the hunting location"></textarea>
-            </div>
-            <div class="form-group">
-              <label for="listing-regulations" class="form-label">Regulations & Notes</label>
-              <textarea id="listing-regulations" name="regulations" class="form-textarea" rows="3" placeholder="Special regulations, season info, etc."></textarea>
-            </div>
-            <div class="form-group">
-              <label for="listing-amenities" class="form-label">Amenities</label>
-              <input type="text" id="listing-amenities" name="amenities" class="form-input" placeholder="Parking, Boat Launch, Blinds">
-              <p class="form-help">Comma-separated list</p>
-            </div>
-            <div class="form-group">
-              <label for="listing-image" class="form-label">Image URL</label>
-              <input type="url" id="listing-image" name="featured_image_url" class="form-input" placeholder="https://...">
-            </div>
-            <div class="form-group">
-              <label for="listing-website" class="form-label">Website</label>
-              <input type="url" id="listing-website" name="website_url" class="form-input" placeholder="https://...">
-            </div>
-            <div class="form-group">
-              <label for="listing-contact" class="form-label">Contact Info</label>
-              <input type="text" id="listing-contact" name="contact_email" class="form-input" placeholder="Email address">
-            </div>
-            <div id="msg-directory-listing" style="display: none;" role="alert"></div>
-            <button type="submit" class="btn btn--primary">Create Listing</button>
-          </form>
+          </div>
         </div>
 
+        <!-- Settings Panel -->
+        <div class="admin-panel" id="panel-settings">
+          <div class="admin-table-card">
+            <div class="admin-table-card__header">
+              <h2 class="admin-table-card__title">Settings</h2>
+            </div>
+            <div style="padding: var(--space-5);">
+              <div class="admin-form-group">
+                <label class="admin-form-label">GitHub Repository</label>
+                <input type="text" class="admin-form-input" value="Dest-89/bolingo" disabled>
+                <p class="admin-form-help">Content is stored in this GitHub repository</p>
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-form-label">API Status</label>
+                <div id="api-status" style="display: flex; align-items: center; gap: var(--space-2);">
+                  <span style="width: 10px; height: 10px; border-radius: 50%; background: #4ade80;"></span>
+                  <span style="color: var(--color-text);">Connected</span>
+                </div>
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-form-label">Cache</label>
+                <button class="admin-btn admin-btn--secondary" onclick="AdminApp.clearCache()">
+                  Clear Cache
+                </button>
+                <p class="admin-form-help">Clear cached content to fetch fresh data</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </section>
-  </main>
+    </main>
+  </div>
 
-  <!-- Footer Placeholder -->
-  <div id="footer-placeholder"></div>
+  <!-- Modals will be inserted here by JS -->
+  <div id="modals-container"></div>
+
+  <!-- Toast Container -->
+  <div class="admin-toast-container" id="toast-container"></div>
+
+  <!-- Loading Overlay -->
+  <div class="admin-loading" id="loading">
+    <div class="admin-loading__spinner"></div>
+  </div>
 
   <!-- Scripts -->
   <script src="assets/js/api.js"></script>
-  <script src="assets/js/templates.js"></script>
-  <script src="assets/js/ui.js"></script>
-  <script src="assets/js/headerFooter.js"></script>
   <script src="assets/js/pages/admin.js"></script>
 </body>
 </html>
