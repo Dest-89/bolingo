@@ -310,7 +310,8 @@ const AdminApp = (function() {
 
   async function loadBlogCategories() {
     try {
-      state.blogCategories = await API.getBlogCategories();
+      const result = await API.getBlogCategories();
+      state.blogCategories = result.data || result || [];
       renderBlogCategories();
       populateCategoryFilter('blog');
     } catch (error) {
@@ -320,7 +321,8 @@ const AdminApp = (function() {
 
   async function loadStoreCategories() {
     try {
-      state.storeCategories = await API.getStoreCategories();
+      const result = await API.getStoreCategories();
+      state.storeCategories = result.data || result || [];
       renderStoreCategories();
       populateCategoryFilter('store');
     } catch (error) {
@@ -330,7 +332,8 @@ const AdminApp = (function() {
 
   async function loadPosts() {
     try {
-      state.posts = await API.getBlogPostsAdmin();
+      const result = await API.getBlogPostsAdmin();
+      state.posts = result.data || result || [];
       renderPosts();
     } catch (error) {
       console.error('Error loading posts:', error);
@@ -339,7 +342,8 @@ const AdminApp = (function() {
 
   async function loadProducts() {
     try {
-      state.products = await API.getStoreProductsAdmin();
+      const result = await API.getStoreProductsAdmin();
+      state.products = result.data || result || [];
       renderProducts();
     } catch (error) {
       console.error('Error loading products:', error);
@@ -348,7 +352,8 @@ const AdminApp = (function() {
 
   async function loadListings() {
     try {
-      state.listings = await API.getDirectoryListingsAdmin();
+      const result = await API.getDirectoryListingsAdmin();
+      state.listings = result.data || result || [];
       renderListings();
     } catch (error) {
       console.error('Error loading listings:', error);
