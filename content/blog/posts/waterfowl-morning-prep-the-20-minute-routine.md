@@ -4,7 +4,7 @@ title: "Waterfowl Morning Prep: The 20-Minute Routine"
 category_slug: hampton-area-hunting-intel
 category_name: "Hampton Area Hunting Intel"
 author: "Wilderness Hunters Hub"
-featured_image_url: "https://images.unsplash.com/photo-1456428199391-a3b1cb5e93ab?auto=format&fit=crop&w=1200&q=60"
+featured_image_url: "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=800&h=600&fit=crop"
 excerpt: "MVP starter article seeded for demo—practical, beginner-friendly, and easy to expand."
 tags:
   - hunting

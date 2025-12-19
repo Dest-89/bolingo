@@ -4,7 +4,7 @@ title: "Water Purification on a Budget (Without Gambling)"
 category_slug: survival-camp-skills
 category_name: "Survival & Camp Skills"
 author: "Wilderness Hunters Hub"
-featured_image_url: "https://images.unsplash.com/photo-1456428199391-a3b1cb5e93ab?auto=format&fit=crop&w=1200&q=60"
+featured_image_url: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=800&h=600&fit=crop"
 excerpt: "MVP starter article seeded for demo—practical, beginner-friendly, and easy to expand."
 tags:
   - hunting

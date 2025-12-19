@@ -5,7 +5,7 @@ category_slug: hunting-tips
 category_name: Hunting Tips
 author: "BOLINGO Team"
 excerpt: "Safety should always be your top priority in the field. Learn the fundamental rules every hunter must follow."
-featured_image_url: "https://images.unsplash.com/photo-1516939884455-1445c8652f83?w=800&h=600&fit=crop"
+featured_image_url: "https://images.unsplash.com/photo-1504618223053-559bdef9dd5a?w=800&h=600&fit=crop"
 tags:
   - safety
   - beginners

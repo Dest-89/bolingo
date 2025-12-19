@@ -4,7 +4,7 @@ title: "Packable Rain Shell"
 category_slug: apparel-footwear
 category_name: "Packable Category"
 price: 37.49
-featured_image_url: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=60"
+featured_image_url: "https://images.unsplash.com/photo-1445307806294-bff7f67ff225?w=800&h=600&fit=crop"
 thrivecart_checkout_url: ""
 sku: "P_0011"
 brand: "BOLINGO"

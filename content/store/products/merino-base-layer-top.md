@@ -4,7 +4,7 @@ title: "Merino Base Layer Top"
 category_slug: apparel-footwear
 category_name: "Merino Category"
 price: 22.49
-featured_image_url: "https://images.unsplash.com/photo-1520975958225-0b73f5d6f6e3?auto=format&fit=crop&w=1200&q=60"
+featured_image_url: "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=800&h=600&fit=crop"
 thrivecart_checkout_url: ""
 sku: "P_0009"
 brand: "BOLINGO"

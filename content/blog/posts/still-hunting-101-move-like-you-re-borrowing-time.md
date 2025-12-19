@@ -4,7 +4,7 @@ title: "Still-Hunting 101: Move Like You’re Borrowing Time"
 category_slug: hunting-techniques
 category_name: "Hunting Techniques"
 author: "Wilderness Hunters Hub"
-featured_image_url: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=60"
+featured_image_url: "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&h=600&fit=crop"
 excerpt: "MVP starter article seeded for demo—practical, beginner-friendly, and easy to expand."
 tags:
   - hunting

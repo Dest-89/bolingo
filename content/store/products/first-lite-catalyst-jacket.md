@@ -4,7 +4,7 @@ title: "First Lite Catalyst Soft Shell Jacket"
 category_slug: apparel
 category_name: Apparel
 price: 265.00
-featured_image_url: "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=800&h=600&fit=crop"
+featured_image_url: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
 thrivecart_checkout_url: ""
 sku: "FL-CAT-JKT"
 brand: "First Lite"

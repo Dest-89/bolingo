@@ -17,7 +17,7 @@ amenities:
   - Parking
   - Boat Launch
   - Blinds
-featured_image_url: "https://images.unsplash.com/photo-1505003050312-dc777727d284?w=800&h=600&fit=crop"
+featured_image_url: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&h=600&fit=crop"
 website_url: "https://dwr.virginia.gov/wma/ragged-island/"
 contact_email: "wildlife@dwr.virginia.gov"
 regulations: "Waterfowl hunting by permit only. Apply through DWR lottery system."

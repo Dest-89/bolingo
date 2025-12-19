@@ -4,7 +4,7 @@ title: "Fire in the Rain: A Simple Redundant Kit"
 category_slug: survival-camp-skills
 category_name: "Survival & Camp Skills"
 author: "Wilderness Hunters Hub"
-featured_image_url: "https://images.unsplash.com/photo-1526481280695-3c687fd643ed?auto=format&fit=crop&w=1200&q=60"
+featured_image_url: "https://images.unsplash.com/photo-1542202229-7d93c33f5d07?w=800&h=600&fit=crop"
 excerpt: "MVP starter article seeded for demo—practical, beginner-friendly, and easy to expand."
 tags:
   - hunting

@@ -4,7 +4,7 @@ title: "Burger Press & Patty Paper"
 category_slug: game-processing
 category_name: "Burger Category"
 price: 14.99
-featured_image_url: "https://images.unsplash.com/photo-1526481280695-3c687fd643ed?auto=format&fit=crop&w=1200&q=60"
+featured_image_url: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&h=600&fit=crop"
 thrivecart_checkout_url: ""
 sku: "P_0016"
 brand: "BOLINGO"

@@ -4,7 +4,7 @@ title: "How to Freeze Wild Game So It Doesn’t Taste Like a Freezer"
 category_slug: wild-game-cooking
 category_name: "Wild Game Cooking"
 author: "Wilderness Hunters Hub"
-featured_image_url: "https://images.unsplash.com/photo-1474511320723-9a56873867b5?auto=format&fit=crop&w=1200&q=60"
+featured_image_url: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&h=600&fit=crop"
 excerpt: "MVP starter article seeded for demo—practical, beginner-friendly, and easy to expand."
 tags:
   - hunting

@@ -4,7 +4,7 @@ title: "Tracking in Wet Leaves: What to Look For First"
 category_slug: hunting-techniques
 category_name: "Hunting Techniques"
 author: "Wilderness Hunters Hub"
-featured_image_url: "https://images.unsplash.com/photo-1526481280695-3c687fd643ed?auto=format&fit=crop&w=1200&q=60"
+featured_image_url: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&h=600&fit=crop"
 excerpt: "MVP starter article seeded for demo—practical, beginner-friendly, and easy to expand."
 tags:
   - hunting

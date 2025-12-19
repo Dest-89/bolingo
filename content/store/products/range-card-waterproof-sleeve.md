@@ -4,7 +4,7 @@ title: "Range Card Waterproof Sleeve"
 category_slug: optics-glass
 category_name: "Range Category"
 price: 14.99
-featured_image_url: "https://images.unsplash.com/photo-1526481280695-3c687fd643ed?auto=format&fit=crop&w=1200&q=60"
+featured_image_url: "https://images.unsplash.com/photo-1622017911841-4e2b6a589c2f?w=800&h=600&fit=crop"
 thrivecart_checkout_url: ""
 sku: "P_0004"
 brand: "BOLINGO"

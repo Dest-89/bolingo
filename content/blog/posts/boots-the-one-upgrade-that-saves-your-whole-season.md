@@ -4,7 +4,7 @@ title: "Boots: The One Upgrade That Saves Your Whole Season"
 category_slug: gear-reviews
 category_name: "Gear Reviews"
 author: "Wilderness Hunters Hub"
-featured_image_url: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=60"
+featured_image_url: "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=800&h=600&fit=crop"
 excerpt: "MVP starter article seeded for demo—practical, beginner-friendly, and easy to expand."
 tags:
   - hunting

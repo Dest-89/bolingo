@@ -4,7 +4,7 @@ title: "SITKA Gear Optifade Elevated II Jacket"
 category_slug: apparel
 category_name: Apparel
 price: 349.00
-featured_image_url: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800&h=600&fit=crop"
+featured_image_url: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=800&h=600&fit=crop"
 thrivecart_checkout_url: ""
 sku: "STK-OPT-JKT"
 brand: "SITKA Gear"

@@ -4,7 +4,7 @@ title: "Blister Prevention Foot Kit"
 category_slug: apparel-footwear
 category_name: "Blister Category"
 price: 14.99
-featured_image_url: "https://images.unsplash.com/photo-1526481280695-3c687fd643ed?auto=format&fit=crop&w=1200&q=60"
+featured_image_url: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&h=600&fit=crop"
 thrivecart_checkout_url: ""
 sku: "P_0012"
 brand: "BOLINGO"

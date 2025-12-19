@@ -4,7 +4,7 @@ title: "Navigation Basics: Don’t Rely on One Device"
 category_slug: survival-camp-skills
 category_name: "Survival & Camp Skills"
 author: "Wilderness Hunters Hub"
-featured_image_url: "https://images.unsplash.com/photo-1501706362039-c6e80949a007?auto=format&fit=crop&w=1200&q=60"
+featured_image_url: "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop"
 excerpt: "MVP starter article seeded for demo—practical, beginner-friendly, and easy to expand."
 tags:
   - hunting

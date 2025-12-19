@@ -4,7 +4,7 @@ title: "Field Knife Showdown: Practical, Not Tactical"
 category_slug: gear-reviews
 category_name: "Gear Reviews"
 author: "Wilderness Hunters Hub"
-featured_image_url: "https://images.unsplash.com/photo-1456428199391-a3b1cb5e93ab?auto=format&fit=crop&w=1200&q=60"
+featured_image_url: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&h=600&fit=crop"
 excerpt: "MVP starter article seeded for demo—practical, beginner-friendly, and easy to expand."
 tags:
   - hunting

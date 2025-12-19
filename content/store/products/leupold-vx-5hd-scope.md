@@ -4,7 +4,7 @@ title: "Leupold VX-5HD 3-15x44 Rifle Scope"
 category_slug: optics
 category_name: Optics
 price: 1099.99
-featured_image_url: "https://images.unsplash.com/photo-1595590424283-b8f17842773f?w=800&h=600&fit=crop"
+featured_image_url: "https://images.unsplash.com/photo-1510672981848-a1c4f1cb5ccf?w=800&h=600&fit=crop"
 thrivecart_checkout_url: ""
 sku: "LEU-VX5HD"
 brand: "Leupold"

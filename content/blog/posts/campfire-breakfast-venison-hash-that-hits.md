@@ -4,7 +4,7 @@ title: "Campfire Breakfast: Venison Hash That Hits"
 category_slug: wild-game-cooking
 category_name: "Wild Game Cooking"
 author: "Wilderness Hunters Hub"
-featured_image_url: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=60"
+featured_image_url: "https://images.unsplash.com/photo-1516939884455-1445c8652f83?w=800&h=600&fit=crop"
 excerpt: "MVP starter article seeded for demo—practical, beginner-friendly, and easy to expand."
 tags:
   - hunting

@@ -4,7 +4,7 @@ title: "Pack Organization Pouches"
 category_slug: field-essentials
 category_name: "Pack Category"
 price: 37.49
-featured_image_url: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=60"
+featured_image_url: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&h=600&fit=crop"
 thrivecart_checkout_url: ""
 sku: "P_0007"
 brand: "BOLINGO"

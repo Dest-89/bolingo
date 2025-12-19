@@ -4,7 +4,7 @@ title: "Trail-Cam Data Without Overthinking It"
 category_slug: hunting-techniques
 category_name: "Hunting Techniques"
 author: "Wilderness Hunters Hub"
-featured_image_url: "https://images.unsplash.com/photo-1501706362039-c6e80949a007?auto=format&fit=crop&w=1200&q=60"
+featured_image_url: "https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?w=800&h=600&fit=crop"
 excerpt: "MVP starter article seeded for demo—practical, beginner-friendly, and easy to expand."
 tags:
   - hunting

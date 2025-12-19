@@ -17,7 +17,7 @@ amenities:
   - Parking
   - Trail Access
   - Boat Ramp
-featured_image_url: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800&h=600&fit=crop"
+featured_image_url: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=600&fit=crop"
 website_url: "https://dwr.virginia.gov/wma/big-woods/"
 contact_email: "wildlife@dwr.virginia.gov"
 regulations: "Valid Virginia hunting license required. Check current season dates with DWR."

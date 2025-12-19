@@ -4,7 +4,7 @@ title: "Public vs Private Access: What to Ask Before You Go"
 category_slug: hampton-area-hunting-intel
 category_name: "Hampton Area Hunting Intel"
 author: "Wilderness Hunters Hub"
-featured_image_url: "https://images.unsplash.com/photo-1526481280695-3c687fd643ed?auto=format&fit=crop&w=1200&q=60"
+featured_image_url: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=800&h=600&fit=crop"
 excerpt: "MVP starter article seeded for demo—practical, beginner-friendly, and easy to expand."
 tags:
   - hunting

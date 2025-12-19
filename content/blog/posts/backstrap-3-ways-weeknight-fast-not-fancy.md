@@ -4,7 +4,7 @@ title: "Backstrap 3 Ways: Weeknight Fast, Not Fancy"
 category_slug: wild-game-cooking
 category_name: "Wild Game Cooking"
 author: "Wilderness Hunters Hub"
-featured_image_url: "https://images.unsplash.com/photo-1456428199391-a3b1cb5e93ab?auto=format&fit=crop&w=1200&q=60"
+featured_image_url: "https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?w=800&h=600&fit=crop"
 excerpt: "MVP starter article seeded for demo—practical, beginner-friendly, and easy to expand."
 tags:
   - hunting

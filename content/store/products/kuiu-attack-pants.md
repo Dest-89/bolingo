@@ -4,7 +4,7 @@ title: "KUIU Attack Hunting Pants"
 category_slug: apparel
 category_name: Apparel
 price: 219.00
-featured_image_url: "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=800&h=600&fit=crop"
+featured_image_url: "https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=800&h=600&fit=crop"
 thrivecart_checkout_url: ""
 sku: "KUIU-ATK-PNT"
 brand: "KUIU"

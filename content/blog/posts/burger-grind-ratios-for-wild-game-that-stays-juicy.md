@@ -4,7 +4,7 @@ title: "Burger Grind Ratios for Wild Game That Stays Juicy"
 category_slug: wild-game-cooking
 category_name: "Wild Game Cooking"
 author: "Wilderness Hunters Hub"
-featured_image_url: "https://images.unsplash.com/photo-1501706362039-c6e80949a007?auto=format&fit=crop&w=1200&q=60"
+featured_image_url: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&h=600&fit=crop"
 excerpt: "MVP starter article seeded for demo—practical, beginner-friendly, and easy to expand."
 tags:
   - hunting

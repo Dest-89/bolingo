@@ -4,7 +4,7 @@ title: "Under Armour Ridge Reaper Hunting Boots"
 category_slug: apparel
 category_name: Apparel
 price: 189.99
-featured_image_url: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&h=600&fit=crop"
+featured_image_url: "https://images.unsplash.com/photo-1517824806704-9040b037703b?w=800&h=600&fit=crop"
 thrivecart_checkout_url: ""
 sku: "UA-RR-BOOT"
 brand: "Under Armour"

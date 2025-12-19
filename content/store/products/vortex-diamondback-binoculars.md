@@ -4,7 +4,7 @@ title: "Vortex Diamondback HD 10x42 Binoculars"
 category_slug: optics
 category_name: Optics
 price: 229.99
-featured_image_url: "https://images.unsplash.com/photo-1595590424283-b8f17842773f?w=800&h=600&fit=crop"
+featured_image_url: "https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=800&h=600&fit=crop"
 thrivecart_checkout_url: ""
 sku: "VTX-DBK-1042"
 brand: "Vortex"

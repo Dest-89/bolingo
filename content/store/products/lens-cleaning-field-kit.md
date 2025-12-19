@@ -4,7 +4,7 @@ title: "Lens Cleaning Field Kit"
 category_slug: optics-glass
 category_name: "Lens Category"
 price: 29.99
-featured_image_url: "https://images.unsplash.com/photo-1526178613552-2b45c6c302f0?auto=format&fit=crop&w=1200&q=60"
+featured_image_url: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&h=600&fit=crop"
 thrivecart_checkout_url: ""
 sku: "P_0002"
 brand: "BOLINGO"

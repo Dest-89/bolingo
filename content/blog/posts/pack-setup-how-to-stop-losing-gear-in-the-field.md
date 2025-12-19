@@ -4,7 +4,7 @@ title: "Pack Setup: How to Stop Losing Gear in the Field"
 category_slug: gear-reviews
 category_name: "Gear Reviews"
 author: "Wilderness Hunters Hub"
-featured_image_url: "https://images.unsplash.com/photo-1474511320723-9a56873867b5?auto=format&fit=crop&w=1200&q=60"
+featured_image_url: "https://images.unsplash.com/photo-1484406566174-9da000fda645?w=800&h=600&fit=crop"
 excerpt: "MVP starter article seeded for demo—practical, beginner-friendly, and easy to expand."
 tags:
   - hunting

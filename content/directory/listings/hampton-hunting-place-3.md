@@ -14,7 +14,7 @@ species_tags:
 amenities:
   - Parking
   - Trail Access
-featured_image_url: "https://images.unsplash.com/photo-1474511320723-9a56873867b5?auto=format&fit=crop&w=1200&q=60"
+featured_image_url: "https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=800&h=600&fit=crop"
 website_url: ""
 contact_email: ""
 regulations: "Check Virginia DWR for current regulations and season dates."

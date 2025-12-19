@@ -5,7 +5,7 @@ category_slug: local-spots
 category_name: Local Spots
 author: "BOLINGO Team"
 excerpt: "Discover the premier hunting destinations in Virginia's Hampton Roads region, from wildlife management areas to private preserves."
-featured_image_url: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800&h=600&fit=crop"
+featured_image_url: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=800&h=600&fit=crop"
 tags:
   - virginia
   - hampton-roads
