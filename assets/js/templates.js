@@ -285,13 +285,37 @@ const Templates = (() => {
       category_name = '',
       category_slug = '',
       image_url = '',
-      thrivecart_checkout_url = ''
+      thrivecart_checkout_url = '',
+      status = 'active'
     } = normalized || {};
 
     const imageUrl = image_url || getPlaceholderImage('product');
-    const isCheckoutAvailable = thrivecart_checkout_url &&
+    const hasCheckoutUrl = thrivecart_checkout_url &&
       thrivecart_checkout_url !== '' &&
       thrivecart_checkout_url !== 'https://example.com/thrivecart-checkout-link';
+
+    // Determine availability based on status field
+    const statusLower = (status || 'active').toLowerCase();
+    const isInStock = statusLower === 'active' || statusLower === 'in_stock' || statusLower === 'in stock';
+    const isComingSoon = statusLower === 'coming_soon' || statusLower === 'coming soon';
+    const isOutOfStock = statusLower === 'out_of_stock' || statusLower === 'out of stock';
+
+    // Get status display text
+    let stockText = 'In Stock';
+    let stockClass = 'card__stock-dot--available';
+    if (isComingSoon) {
+      stockText = 'Coming Soon';
+      stockClass = 'card__stock-dot--soon';
+    } else if (isOutOfStock) {
+      stockText = 'Out of Stock';
+      stockClass = 'card__stock-dot--unavailable';
+    } else if (!isInStock) {
+      stockText = 'Coming Soon';
+      stockClass = 'card__stock-dot--soon';
+    }
+
+    // Can purchase if in stock AND has checkout URL
+    const canPurchase = isInStock && hasCheckoutUrl;
 
     // Generate item number for catalog effect
     const itemNum = Math.floor(Math.random() * 9000) + 1000;
@@ -324,10 +348,10 @@ const Templates = (() => {
           ${description ? `<p class="card__excerpt">${escapeHtml(truncate(description, 90))}</p>` : ''}
           <div class="card__product-footer">
             <div class="card__availability">
-              <span class="card__stock-dot ${isCheckoutAvailable ? 'card__stock-dot--available' : 'card__stock-dot--soon'}"></span>
-              <span class="card__stock-text">${isCheckoutAvailable ? 'In Stock' : 'Coming Soon'}</span>
+              <span class="card__stock-dot ${stockClass}"></span>
+              <span class="card__stock-text">${stockText}</span>
             </div>
-            ${isCheckoutAvailable
+            ${canPurchase
               ? `<a href="${escapeHtml(thrivecart_checkout_url)}" class="card__buy-btn" target="_blank" rel="noopener noreferrer">
                   <span>Add to Kit</span>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

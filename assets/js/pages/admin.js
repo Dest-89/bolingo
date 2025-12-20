@@ -99,6 +99,26 @@ const AdminApp = (function() {
     return '$' + parseFloat(price).toFixed(2);
   }
 
+  function getProductStatusLabel(status) {
+    const labels = {
+      'active': 'In Stock',
+      'coming_soon': 'Coming Soon',
+      'out_of_stock': 'Out of Stock',
+      'inactive': 'Hidden'
+    };
+    return labels[status] || 'In Stock';
+  }
+
+  function getProductStatusClass(status) {
+    const classes = {
+      'active': 'active',
+      'coming_soon': 'warning',
+      'out_of_stock': 'inactive',
+      'inactive': 'inactive'
+    };
+    return classes[status] || 'active';
+  }
+
   function debounce(fn, delay) {
     let timer;
     return function(...args) {
@@ -538,7 +558,7 @@ const AdminApp = (function() {
           </td>
           <td>${escapeHtml(category.name || product.category_slug || '-')}</td>
           <td>${formatPrice(product.price)}</td>
-          <td><span class="admin-table__badge admin-table__badge--${product.status === 'active' ? 'active' : 'inactive'}">${product.status === 'active' ? 'Active' : 'Inactive'}</span></td>
+          <td><span class="admin-table__badge admin-table__badge--${getProductStatusClass(product.status)}">${getProductStatusLabel(product.status)}</span></td>
           <td>
             <div class="admin-table__actions">
               <button class="admin-table__btn" onclick="AdminApp.editProduct('${escapeHtml(product.slug)}')" title="Edit">
@@ -978,8 +998,10 @@ const AdminApp = (function() {
                 <div class="admin-form-group">
                   <label class="admin-form-label">Status</label>
                   <select class="admin-form-select" name="status">
-                    <option value="active" ${data?.status === 'active' ? 'selected' : ''}>Active</option>
-                    <option value="inactive" ${data?.status === 'inactive' ? 'selected' : ''}>Inactive</option>
+                    <option value="active" ${data?.status === 'active' || !data?.status ? 'selected' : ''}>In Stock</option>
+                    <option value="coming_soon" ${data?.status === 'coming_soon' ? 'selected' : ''}>Coming Soon</option>
+                    <option value="out_of_stock" ${data?.status === 'out_of_stock' ? 'selected' : ''}>Out of Stock</option>
+                    <option value="inactive" ${data?.status === 'inactive' ? 'selected' : ''}>Hidden</option>
                   </select>
                 </div>
               </div>

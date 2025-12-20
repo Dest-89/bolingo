@@ -1823,6 +1823,12 @@ p:last-child {
   animation: none;
 }
 
+.card__stock-dot--unavailable {
+  background: var(--color-error, #dc3545);
+  box-shadow: 0 0 8px var(--color-error, #dc3545);
+  animation: none;
+}
+
 @keyframes pulse {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.5; }
