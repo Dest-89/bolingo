@@ -908,9 +908,14 @@ const API = (() => {
   }
 
   async function updateStoreProduct(slug, data) {
+    console.log('[API.updateStoreProduct] Received data:', data);
+    console.log('[API.updateStoreProduct] Status in data:', data.status);
+
     const filePath = `${CONFIG.contentPaths.storeProducts}/${slug}.md`;
     const file = await getFile(filePath);
     const { frontmatter: existing, content: existingContent } = parseMarkdown(file.content);
+
+    console.log('[API.updateStoreProduct] Existing frontmatter:', existing);
 
     const frontmatter = {
       ...existing,
@@ -923,8 +928,13 @@ const API = (() => {
     delete frontmatter.description;
     delete frontmatter.short_description;
 
+    console.log('[API.updateStoreProduct] Merged frontmatter:', frontmatter);
+    console.log('[API.updateStoreProduct] Status in merged frontmatter:', frontmatter.status);
+
     const content = data.short_description || data.description || existingContent;
     const markdown = createMarkdown(frontmatter, content);
+
+    console.log('[API.updateStoreProduct] Final markdown (first 500 chars):', markdown.substring(0, 500));
 
     await saveFile(filePath, markdown, `Update product: ${frontmatter.title}`, file.sha);
 

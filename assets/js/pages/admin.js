@@ -1533,6 +1533,10 @@ const AdminApp = (function() {
     const data = getFormData('product-form');
     const btn = document.getElementById('modal-submit');
 
+    // Debug: Log the form data being saved
+    console.log('[saveProduct] Form data collected:', data);
+    console.log('[saveProduct] Status value:', data.status);
+
     // Add timestamp
     if (!state.editingItem) {
       data.created_at = new Date().toISOString();
@@ -1542,14 +1546,23 @@ const AdminApp = (function() {
 
     try {
       if (state.editingItem) {
-        await API.updateStoreProduct(data.slug, data);
+        console.log('[saveProduct] Updating product:', data.slug);
+        const result = await API.updateStoreProduct(data.slug, data);
+        console.log('[saveProduct] Update result:', result);
         showToast('Product updated', 'success');
       } else {
+        console.log('[saveProduct] Creating new product');
         await API.createStoreProduct(data);
         showToast('Product created', 'success');
       }
       closeModal();
+
+      // Wait a moment for GitHub to process the commit before reloading
+      await new Promise(resolve => setTimeout(resolve, 1500));
+
+      console.log('[saveProduct] Reloading products...');
       await loadProducts();
+      console.log('[saveProduct] Products reloaded, state.products:', state.products.map(p => ({slug: p.slug, status: p.status})));
       updateStats();
     } catch (error) {
       console.error('Error saving product:', error);
