@@ -11,7 +11,7 @@ brand: BOLINGO
 status: coming_soon
 created_at: "2025-12-19T10:29:30.566150Z"
 content: 
-updated_at: "2025-12-20T13:19:28.363Z"
+updated_at: "2025-12-20T13:20:45.111Z"
 ---
 
 # All-Weather Hunting Gloves
@@ -19,5 +19,5 @@ updated_at: "2025-12-20T13:19:28.363Z"
 Seeded MVP product description.
 
 - Practical benefit
-- Whatâs included
-- Who itâs for
+- WhatÃ¢ÂÂs included
+- Who itÃ¢ÂÂs for
