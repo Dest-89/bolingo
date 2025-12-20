@@ -401,10 +401,19 @@ const API = (() => {
 
   /**
    * Fetch raw content from GitHub (no auth needed for public repos)
+   * Uses cache-busting to bypass GitHub's CDN cache
    */
-  async function fetchRawContent(path) {
-    const url = `${GITHUB_RAW_BASE}/${path}`;
-    const response = await fetch(url);
+  async function fetchRawContent(path, bustCache = false) {
+    let url = `${GITHUB_RAW_BASE}/${path}`;
+
+    // Add cache-busting parameter to bypass GitHub CDN cache
+    if (bustCache) {
+      url += `?t=${Date.now()}`;
+    }
+
+    const response = await fetch(url, {
+      cache: bustCache ? 'no-store' : 'default'
+    });
 
     if (!response.ok) {
       if (response.status === 404) {
@@ -1221,13 +1230,18 @@ const API = (() => {
 
   /**
    * Get all blog posts including drafts (admin only)
+   * Always fetches fresh data (no cache) for admin views
    */
   async function getBlogPostsAdmin() {
+    // Skip local cache for admin - always get fresh from GitHub
+    Cache.invalidate('list', `files_${CONFIG.contentPaths.blogPosts}`);
+
     const files = await listFiles(CONFIG.contentPaths.blogPosts);
     const posts = [];
 
     for (const file of files) {
-      const content = await fetchRawContent(file.path);
+      // Use cache-busting for admin to get fresh data
+      const content = await fetchRawContent(file.path, true);
       if (!content) continue;
 
       const { frontmatter, content: markdownContent } = parseMarkdown(content);
@@ -1246,13 +1260,18 @@ const API = (() => {
 
   /**
    * Get all products including inactive (admin only)
+   * Always fetches fresh data (no cache) for admin views
    */
   async function getStoreProductsAdmin() {
+    // Skip local cache for admin - always get fresh from GitHub
+    Cache.invalidate('list', `files_${CONFIG.contentPaths.storeProducts}`);
+
     const files = await listFiles(CONFIG.contentPaths.storeProducts);
     const products = [];
 
     for (const file of files) {
-      const content = await fetchRawContent(file.path);
+      // Use cache-busting for admin to get fresh data
+      const content = await fetchRawContent(file.path, true);
       if (!content) continue;
 
       const { frontmatter, content: description } = parseMarkdown(content);
@@ -1272,13 +1291,18 @@ const API = (() => {
 
   /**
    * Get all listings including inactive (admin only)
+   * Always fetches fresh data (no cache) for admin views
    */
   async function getDirectoryListingsAdmin() {
+    // Skip local cache for admin - always get fresh from GitHub
+    Cache.invalidate('list', `files_${CONFIG.contentPaths.directoryListings}`);
+
     const files = await listFiles(CONFIG.contentPaths.directoryListings);
     const listings = [];
 
     for (const file of files) {
-      const content = await fetchRawContent(file.path);
+      // Use cache-busting for admin to get fresh data
+      const content = await fetchRawContent(file.path, true);
       if (!content) continue;
 
       const { frontmatter, content: description } = parseMarkdown(content);
