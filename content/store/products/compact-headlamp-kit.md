@@ -11,7 +11,7 @@ brand: BOLINGO
 status: out_of_stock
 created_at: "2025-12-19T10:29:30.550093Z"
 content: 
-updated_at: "2025-12-20T15:01:12.552Z"
+updated_at: "2025-12-20T15:10:52.524Z"
 ---
 
 # Compact Headlamp Kit
@@ -19,5 +19,5 @@ updated_at: "2025-12-20T15:01:12.552Z"
 Seeded MVP product description.
 
 - Practical benefit
-- Whatâs included
-- Who itâs for
+- WhatÃ¢ÂÂs included
+- Who itÃ¢ÂÂs for
